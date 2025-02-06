@@ -94,9 +94,17 @@ export default function CreateAccount() {
               className="input"
             />
           </div>
-          <button onClick={createAccount} className="button">
-            Create Account
-          </button>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <button onClick={createAccount} className="button">
+              Create Account
+            </button>
+            <button
+              onClick={() => navigate("/login")}
+              className="button mainFont"
+            >
+              Already have an account? Login
+            </button>
+          </div>
         </div>
       </div>
       <div
@@ -106,16 +114,7 @@ export default function CreateAccount() {
           alignItems: "center",
           flexGrow: 1,
         }}
-      >
-        {/* Optional: Add a link to the login page */}
-        {/* <button
-            onClick={() => console.log("Navigate to login page")}
-            style={{ width: "10%" }}
-            className="button mainFont"
-          >
-            Already have an account? Login
-          </button> */}
-      </div>
+      ></div>
     </div>
   );
 }

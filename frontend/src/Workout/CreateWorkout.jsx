@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { router } from './Workout.js';
 import "./CreateWorkout.css";
-
+const express = require("express");
+const Workout = require("../models/Workout");
+const User = require("../models/User");
 const CreateWorkout = () => {
   const [workoutName, setWorkoutName] = useState("");
   const [bodyRegion, setBodyRegion] = useState("Upper Body");
@@ -13,7 +16,9 @@ const CreateWorkout = () => {
     { name: "Leg Press", image: "https://squatwolf.com/cdn/shop/articles/shutterstock_215163556-min.jpg?v=1719993920" },
     { name: "Lunges", image: "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png" },
   ];
-
+  const saveWorkout = (currentWorkout) =>{
+    router.post(currentWorkout);
+  }
   const addToWorkout = (movement) => {
     if (!currentWorkout.includes(movement)) {
       setCurrentWorkout((prev) => [...prev, movement]);
@@ -112,6 +117,11 @@ const CreateWorkout = () => {
       {/* Footer with Next Button on the Left */}
       <footer className="footer">
         <button className="next-button">Next</button>
+      </footer>
+      <footer className="footer">
+        <button className="save-workout"
+          onClick={() => saveWorkout(Workout)}
+          > Create Workout </button>
       </footer>
     </div>
   );

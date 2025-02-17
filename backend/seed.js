@@ -75,6 +75,27 @@ const movements = [
         type: "cardio",
         equipment: ["none"],
         difficulty: "intermediate"
+    },
+    {
+        name: "Crunches",
+        description: "Full-body resistance movement that improves core strength ",
+        type: "strength",
+        equipment: ["none"],
+        difficulty: "beginner"
+    },
+    {
+        name: "Plank",
+        description: "Full-body core movement that builds strength",
+        type: "strength",
+        equipment: ["none"],
+        difficulty: "beginner"
+    }
+    {
+        name: "Jumping Jacks",
+        description: "Full-body cardio movement that engages your whole body",
+        type: "cardio",
+        equipment: ["none"],
+        difficulty: "beginner"
     }
 ];
 
@@ -103,6 +124,21 @@ async function seedDatabase() {
                         movement: insertedMovements.find(m => m.name === "Dumbbell Row")._id,
                         sets: 3,
                         reps: 12
+                    },
+                    {
+                        movement: insertedMovements.find(m => m.name === "Crunches")._id,
+                        sets: 3,
+                        reps: 10
+                    },
+                    {
+                        movement: insertedMovements.find(m => m.name === "Plank")._id,
+                        sets: 3,
+                        reps: 20
+                    },
+                    {
+                        movement: insertedMovements.find(m => m.name === "Jumping Jacks")._id,
+                        sets: 3
+                        reps: 15
                     }
                 ],
                 difficulty: "beginner",

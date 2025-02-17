@@ -5,6 +5,7 @@ const WorkoutSchema = new mongoose.Schema({
     description: { type: String },
     movements: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movement"}],
     createdUser: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
+    difficulty: { type: mongoose.Schema.Types.ObjectID, ref: "Difficulty" }
 });
 
 const Workout = mongoose.model('workouts', WorkoutSchema);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./accounts.css";
+import { joinApi } from "../api/api";
 
 export default function CreateAccount() {
   const [username, setUsername] = useState("");
@@ -16,7 +17,7 @@ export default function CreateAccount() {
   const handleSetConfirmPassword = (event) =>
     setConfirmPassword(event.target.value);
 
-  function createAccount() {
+  const createAccount = async () => {
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -31,8 +32,17 @@ export default function CreateAccount() {
 
     // API call for account creation
     console.log("Account creation data:", data);
-    navigate("/");
-  }
+    try {
+      const res = await joinApi(data);
+      console.log(data);
+      console.log(res.status);
+      if (res) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>

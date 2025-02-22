@@ -50,7 +50,7 @@ function Explore() {
   ];
 
   function addSelectedWorkouts() {
-    console.log("Adding selected workouts:", Array.from(selectedWorkouts));
+    console.log("Adding selected workouts:", Array.from(addedWorkouts));
     // Perform the addition logic here, such as updating a database or state
   }
 

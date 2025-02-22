@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { router } from './Workout.js';
+import { router } from './workouts.js';
 import "./CreateWorkout.css";
 const express = require("express");
 const Workout = require("../models/Workout");

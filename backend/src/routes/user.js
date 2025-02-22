@@ -86,9 +86,9 @@ router.post(
   }
 );
 
-router.get("/api/user/login", async (req, res) => {
+router.post("/api/user/login", async (req, res) => {
   try {
-    const { user, password } = req.query;
+    const { user, password } = req.body;
 
     const existingUser = await User.findOne({
       $or: [{ email: user }, { username: user }],

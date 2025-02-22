@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./accounts.css";
+import { signInApi } from "../api/api";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -9,11 +10,21 @@ export default function Login() {
   const handleSetUsername = (event) => setUsername(event.target.value);
   const handleSetPassword = (event) => setPassword(event.target.value);
 
-  function login() {
-    const data = { username: String(username), password: String(password) };
-    //api call
-    navigate("/");
-  }
+  const login = async () => {
+    const data = { user: String(username), password: String(password) };
+
+    try {
+      const res = await signInApi(data);
+      console.log(data);
+      console.log(res.status);
+      if (res) {
+        localStorage.setItem("token", res);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>

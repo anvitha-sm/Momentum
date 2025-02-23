@@ -30,17 +30,6 @@ router.get("/api/workouts/saved", authenticate, async (req, res) => {
   }
 });
 
-// Get all user-created workouts
-router.get("/api/workouts/created/:userId", authenticate, async (req, res) => {
-  try {
-    const user = req.user;
-    const createdWorkouts = await Workout.find({ createdUser: user._id });
-    res.status(200).json(createdWorkouts);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 // Create a new workout
 router.post("/api/workouts/create", authenticate, async (req, res) => {
   try {

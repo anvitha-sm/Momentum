@@ -18,7 +18,8 @@ export default function Login() {
       console.log(data);
       console.log(res.status);
       if (res) {
-        localStorage.setItem("token", res);
+        localStorage.setItem("token", JSON.stringify(res.token));
+        console.log(localStorage.getItem("token"));
         navigate("/");
       }
     } catch (error) {

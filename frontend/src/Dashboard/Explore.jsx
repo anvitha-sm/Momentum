@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllWorkoutsAPI, saveWorkoutAPI } from "../api/api";
 import "./dashboard.css";
 
 function Explore() {
+  const token = localStorage.getItem("token");
   const [searchQuery, setSearchQuery] = useState("");
   const [addedWorkouts, setAddedWorkouts] = useState(new Set());
+  const [workouts, setWorkouts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      fetchData();
+    }
+  }, [token]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const res = await getAllWorkoutsAPI();
+      setWorkouts(res);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+    setLoading(false);
+  };
 
   function goBack() {
     navigate(-1);
@@ -13,52 +34,43 @@ function Explore() {
 
   function toggleAdd(workout) {
     const newAddedWorkouts = new Set(addedWorkouts);
-    if (newAddedWorkouts.has(workout.name)) {
-      newAddedWorkouts.delete(workout.name);
+    if (newAddedWorkouts.has(workout._id)) {
+      newAddedWorkouts.delete(workout._id);
     } else {
-      newAddedWorkouts.add(workout.name);
+      newAddedWorkouts.add(workout._id);
     }
     setAddedWorkouts(newAddedWorkouts);
   }
 
-  // placeholder for workouts
-  const workouts = [
-    {
-      name: "Workout 1",
-      bodyRegion: "Lower Body",
-      image:
-        "https://static.independent.co.uk/2024/09/03/13/how-to-perform-a-barbell-squat-correctly.jpg?width=1200&height=1200&fit=crop",
-    },
-    {
-      name: "Workout 2",
-      bodyRegion: "Upper Body",
-      image:
-        "https://squatwolf.com/cdn/shop/articles/shutterstock_215163556-min.jpg?v=1719993920",
-    },
-    {
-      name: "Workout 3",
-      bodyRegion: "Cardio",
-      image:
-        "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png",
-    },
-    {
-      name: "Workout 4",
-      bodyRegion: "Upper Body",
-      image:
-        "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png",
-    },
-  ];
-
-  function addSelectedWorkouts() {
+  const addSelectedWorkouts = async () => {
     console.log("Adding selected workouts:", Array.from(addedWorkouts));
-    // Perform the addition logic here, such as updating a database or state
-  }
+    try {
+      for (const workout of addedWorkouts) {
+        await saveWorkoutAPI(
+          {
+            workoutId: workout,
+          },
+          token
+        );
+        console.log("Workout added successfully:", workout);
+      }
+
+      alert("All workouts added successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Failed to add workout:", error);
+    }
+  };
+  //add back filtering by body region when added to database
 
   // filters by name or body region
-  const filteredWorkouts = workouts.filter(
-    (workout) =>
-      workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      workout.bodyRegion.toLowerCase().includes(searchQuery.toLowerCase())
+  // const filteredWorkouts = workouts.filter(
+  //   (workout) =>
+  //     workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     workout.bodyRegion.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
+  const filteredWorkouts = workouts.filter((workout) =>
+    workout.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
   return (
     <div className="dashboard explore-page">
@@ -76,16 +88,16 @@ function Explore() {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <div className="dashboard-flex workout-list">
-        {filteredWorkouts.map((movement) => (
-          <div key={movement.name} className="workout-card">
+        {filteredWorkouts.map((workout) => (
+          <div key={workout._id} className="workout-card">
             <img
-              src={movement.image}
-              alt={movement.name}
+              src={workout.imageUrl}
+              alt={workout.name}
               className="workout-image"
             />
-            <p className="workout-name">{movement.name}</p>
-            <button className="add-button" onClick={() => toggleAdd(movement)}>
-              {addedWorkouts.has(movement.name) ? "-" : "+"}
+            <p className="workout-name">{workout.name}</p>
+            <button className="add-button" onClick={() => toggleAdd(workout)}>
+              {addedWorkouts.has(workout._id) ? "-" : "+"}
             </button>
           </div>
         ))}

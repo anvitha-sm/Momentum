@@ -4,7 +4,11 @@ const User = mongoose.model("user");
 
 const authenticate = async (req, res, next) => {
   try {
-    const token = req.header("Authorization").replace("Bearer ", "");
+    console.log(req.header("Authorization"));
+    const token = req
+      .header("Authorization")
+      .replace("Bearer ", "")
+      .replace(/['"]+/g, "");
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await User.findOne({ _id: decoded.id });
 

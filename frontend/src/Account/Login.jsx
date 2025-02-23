@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { router } from './user.js'
 import "./accounts.css";
 import { signInApi } from "../api/api";
 
@@ -27,12 +26,6 @@ export default function Login() {
       console.log(error);
     }
   };
-=======
-  function login() {
-    const data = { username: String(username), password: String(password) };
-    router.post(data);
-    navigate("/");
-  }
 
   return (
     <div>

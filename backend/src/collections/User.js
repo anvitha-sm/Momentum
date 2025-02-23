@@ -11,6 +11,12 @@ const UserSchema = new mongoose.Schema({
       ref: "Workout",
     },
   ],
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", 
+    }
+  ]
 });
 
 mongoose.model("user", UserSchema);

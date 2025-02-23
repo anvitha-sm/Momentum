@@ -1,27 +1,62 @@
+import React, { useState, useEffect } from "react";
+=======
 import React, { useState } from "react";
 import { router } from './workouts.js';
 import "./CreateWorkout.css";
-const express = require("express");
-const Workout = require("../models/Workout");
-const User = require("../models/User");
+import { getAllMovementsAPI, createWorkoutAPI } from "../api/api.jsx";
+import { useNavigate } from "react-router-dom";
 const CreateWorkout = () => {
+  const token = localStorage.getItem("token");
   const [workoutName, setWorkoutName] = useState("");
   const [bodyRegion, setBodyRegion] = useState("Upper Body");
   const [currentWorkout, setCurrentWorkout] = useState([]);
+  const [movements, setMovements] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  // these are temporary images as a placeholder until we have movement components
-  const movements = [
-    { name: "Squat", image: "https://static.independent.co.uk/2024/09/03/13/how-to-perform-a-barbell-squat-correctly.jpg?width=1200&height=1200&fit=crop" },
-    { name: "Leg Press", image: "https://squatwolf.com/cdn/shop/articles/shutterstock_215163556-min.jpg?v=1719993920" },
-    { name: "Lunges", image: "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png" },
-  ];
-  const saveWorkout = (currentWorkout) =>{
-    router.post(currentWorkout);
-  }
+  useEffect(() => {
+    if (token) {
+      fetchData();
+    }
+  }, [token]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const res = await getAllMovementsAPI();
+      setMovements(res);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+    setLoading(false);
+  };
+
+  const saveWorkout = async () => {
+    try {
+      await createWorkoutAPI(
+        {
+          name: workoutName,
+          movements: currentWorkout,
+        },
+        token
+      );
+      alert("Workout added successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Failed to add workout:", error);
+    }
+  };
+
   const addToWorkout = (movement) => {
     if (!currentWorkout.includes(movement)) {
       setCurrentWorkout((prev) => [...prev, movement]);
+    }
+  };
+
+  const removeFromWorkout = (movement) => {
+    if (currentWorkout.includes(movement)) {
+      setCurrentWorkout((prev) => prev.filter((item) => item !== movement));
     }
   };
 
@@ -80,7 +115,7 @@ const CreateWorkout = () => {
             {filteredMovements.map((movement) => (
               <div key={movement.name} className="movement-card">
                 <img
-                  src={movement.image}
+                  src={movement.imageUrl}
                   alt={movement.name}
                   className="movement-image"
                 />
@@ -103,25 +138,27 @@ const CreateWorkout = () => {
             {currentWorkout.map((movement) => (
               <div key={movement.name} className="movement-card">
                 <img
-                  src={movement.image}
+                  src={movement.imageUrl}
                   alt={movement.name}
                   className="movement-image"
                 />
                 <p className="movement-name">{movement.name}</p>
+                <button
+                  className="add-button"
+                  onClick={() => removeFromWorkout(movement)}
+                >
+                  -
+                </button>
               </div>
             ))}
           </div>
         </section>
       </main>
 
-      {/* Footer with Next Button on the Left */}
       <footer className="footer">
-        <button className="next-button">Next</button>
-      </footer>
-      <footer className="footer">
-        <button className="save-workout"
-          onClick={() => saveWorkout(Workout)}
-          > Create Workout </button>
+        <button className="save-workout" onClick={saveWorkout}>
+          Create Workout
+        </button>
       </footer>
     </div>
   );

@@ -54,9 +54,17 @@ export default function Login() {
               className="input"
             />
           </div>
-          <button onClick={login} className="button">
-            Login
-          </button>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <button onClick={login} className="button">
+              Login
+            </button>
+            <button
+              onClick={() => navigate("/signup")}
+              className="button mainFont"
+            >
+              Don&apos;t have an account? Sign up
+            </button>
+          </div>
         </div>
       </div>
       <div

@@ -27,7 +27,7 @@ router.post("/api/friends/:friendId", authenticate, async (req, res) => {
     }
 })
 
-router.delete("/api/friends/:friendId", authenticate, async (req, res) => {
+router.delete("/api/friends/:friendId/delete", authenticate, async (req, res) => {
     const user = req.user;
     const friendId = req.body;
     try {

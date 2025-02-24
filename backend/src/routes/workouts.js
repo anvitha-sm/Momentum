@@ -69,7 +69,7 @@ router.post("/api/workouts/create", authenticate, async (req, res) => {
 });
 
 // Save an existing workout
-router.post("/api/workouts/save", authenticate, async (req, res) => {
+router.post("/api/workouts/:workoutId/save", authenticate, async (req, res) => {
   try {
     const { workoutId } = req.body;
     const workout = await Workout.findById(workoutId);
@@ -89,7 +89,7 @@ router.post("/api/workouts/save", authenticate, async (req, res) => {
 
 // Delete a workout (from user-saved)
 router.delete(
-  "/api/workouts/delete/:workoutId",
+  "/api/workouts/:workoutId/delete",
   authenticate,
   async (req, res) => {
     try {

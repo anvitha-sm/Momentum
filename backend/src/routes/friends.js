@@ -4,7 +4,7 @@ const router = express.Router();
 const User = mongoose.model("user");
 const authenticate = require("../middleware/authenticate");
 
-router.post("/api/friends/:friendId", authenticate, async (req, res) => {
+router.post("/api/friends/:friendId/add", authenticate, async (req, res) => {
     const user = req.user;
     const friendId = req.body;
     try {
@@ -27,7 +27,7 @@ router.post("/api/friends/:friendId", authenticate, async (req, res) => {
     }
 })
 
-router.delete("/api/friends/:friendId/delete", authenticate, async (req, res) => {
+router.delete("/api/friends/:friendId/remove", authenticate, async (req, res) => {
     const user = req.user;
     const friendId = req.body;
     try {

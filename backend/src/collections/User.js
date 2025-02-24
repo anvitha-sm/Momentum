@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
     saturday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
     sunday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
   },
+  loggedWorkouts: [{ type: mongoose.Schema.Types.ObjectId, ref: "LoggedWorkout" }]
 });
 
 mongoose.model("user", UserSchema);

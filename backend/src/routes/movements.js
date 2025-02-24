@@ -15,13 +15,13 @@ router.get("/api/movements/", async (req, res) => {
 router.post("/api/movements/add", async (req, res) => {
   try {
     const { name, muscleGroup, imageUrl } = req.body;
-    const newMovment = new Movement({
+    const newMovement = new Movement({
       name,
       muscleGroup,
       imageUrl,
     });
-    await newMovment.save();
-    res.json(newMovment);
+    await newMovement.save();
+    res.json(newMovement);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

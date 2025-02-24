@@ -5,18 +5,17 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  savedWorkouts: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Workout",
-    },
-  ],
-  friends: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", 
-    }
-  ]
+  savedWorkouts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  schedule: {
+    monday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+    tuesday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+    wednesday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+    thursday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+    friday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+    saturday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+    sunday: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
+  },
 });
 
 mongoose.model("user", UserSchema);

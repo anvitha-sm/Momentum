@@ -112,3 +112,22 @@
   font-size: 15px;
   background-color: gray;
 }
+
+.remove-button {
+  justify-content: flex-end;
+  font-size: 15px;
+  background-color: red;
+}
+.add-button {
+  justify-content: flex-end;
+  font-size: 15px;
+  background-color: rgb(48, 192, 48);
+}
+
+.userDisplay {
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 6px;
+  background-color: lightgray;
+  overflow: hidden;
+}

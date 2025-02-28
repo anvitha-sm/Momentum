@@ -6,6 +6,9 @@ import HomePage from "./HomePage";
 import CreateWorkout from "./Workout/CreateWorkout";
 import Dashboard from "./Dashboard/Dashboard";
 import Explore from "./Dashboard/Explore";
+import UserProfile from "./Account/UserProfile";
+import LoggedWorkoutPage from "./Workout/LoggedWorkoutPage";
+import ViewOtherUserPage from "./Account/ViewOtherUserPage";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
       <Route path="/createworkout" element={<CreateWorkout />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/explore" element={<Explore />} />
+      <Route path="/profile" element={<UserProfile />} />
+      <Route path="/logged-workouts" element={<LoggedWorkoutPage />} />
+      <Route path="/user/:userId" element={<ViewOtherUserPage />} />
     </Routes>
   );
 }

@@ -54,6 +54,11 @@ function Explore(){
             console.error("Failed to remove friend: ", error);
         }
     }
+    
+    const viewUserProfile = (userId) => {
+        navigate(`/user/${userId}`);
+    }
+    
     return (
         <Navbar>
         <div className="dashboard explore-page">
@@ -63,14 +68,16 @@ function Explore(){
                 {searchUserFilter.map((user) =>
                   <div className="userDisplay">
                     <p className="user-name"> {user.username}</p>
-                    <button className="add-button" onClick={() => addUsers(user)}> Add Friend </button>
-                    <button className="remove-button" onClick={() => removeFriend(user)}> Remove Friend </button>
+                    <div className="user-action-buttons">
+                      <button className="add-button" onClick={() => addUsers(user)}> Add Friend </button>
+                      <button className="remove-button" onClick={() => removeFriend(user)}> Remove Friend </button>
+                      <button className="view-profile-button" onClick={() => viewUserProfile(user._id)}> View Profile </button>
                     </div>
+                  </div>
                 )}
             </div>
         </div>
         </Navbar>
-
     )
 }
 

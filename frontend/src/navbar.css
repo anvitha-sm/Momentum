@@ -1,0 +1,16 @@
+nav {
+    background-color: lightgray;
+    display: flex;
+    justify-content: right;
+    position: sticky;
+}
+nav .head{
+    justify-content: left;
+    font-variant: small-caps;
+}
+nav .list{
+    display: flex;
+}
+nav .link{
+    color: skyblue;
+}

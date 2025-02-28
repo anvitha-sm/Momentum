@@ -1,30 +1,40 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose')
-const User = require('./collections/User')
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+require("./src/collections/User");
+require("./src/collections/Workout");
+require("./src/collections/Movement");
+
+require("dotenv").config();
+
+const userRouter = require("./src/routes/user");
+const movementsRouter = require("./src/routes/movements");
+const workoutsRouter = require("./src/routes/workouts");
 
 const app = express();
-const PORT= 5000;
+const PORT = 8080;
 
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => {
-    console.log('Connected to MongoDB');
-    const db = mongoose.connection.db;
-    const newUser = new User({ name: "a name", email:"an email", password: "password"})
-    newUser.save();
-})
-.catch(err => {
-    console.error(err);
-})
+app.use(userRouter);
+app.use(movementsRouter);
+app.use(workoutsRouter);
 
-app.get('/', (req, res) => {
-    res.send('Server is running');
-})
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    const db = mongoose.connection.db;
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 
 app.listen(PORT, () => {
-    console.log('Running on PORT ', PORT);
+  console.log("Running on PORT ", PORT);
 });

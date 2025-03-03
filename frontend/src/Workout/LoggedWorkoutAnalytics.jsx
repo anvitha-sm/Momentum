@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAllLoggedWorkoutsAPI } from "../api/api.jsx";
+import './LoggedWorkoutAnalytics.css';
 
 const LoggedWorkoutAnalytics = () => {
     const token = localStorage.getItem("token");
@@ -64,9 +65,18 @@ const LoggedWorkoutAnalytics = () => {
     useEffect(() => {
         if (searchQuery) {
             if (searchType === "movement") {
-                setFilteredData(loggedWorkouts.filter((workout) =>
-                    workout.movements.some((logged) => logged.movement.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                ));
+                setFilteredData(
+                    loggedWorkouts.filter((workout) =>
+                      workout.movements.some((logged) => {
+                        if (logged.movement && logged.movement.name) {
+                          return logged.movement.name
+                            .toLowerCase()
+                            .includes(searchQuery.toLowerCase());
+                        }
+                        return false;
+                      })
+                    )
+                  );
             } else {
                 setFilteredData(loggedWorkouts.filter((workout) =>
                     workout.workouts.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -82,107 +92,107 @@ const LoggedWorkoutAnalytics = () => {
             <header className="header">
                 <h1>Logged Workout Analytics</h1>
             </header>
-
-            <div className="search-logged">
-                <input
-                type="text"
-                placeholder={searchType === "movement" ? "Search for a movement" : "Search for a workout"}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <label>
-                    <input
-                    type="radio"
-                    name="searchType" 
-                    value="movement"
-                    checked={searchType === "movement"}
-                    onChange={() => setSearchType("movement")}
-                    />
-                    Movements
-                </label>
-                <label>
-                    <input
-                    type="radio"
-                    name="searchType" 
-                    value="workout"
-                    checked={searchType === "workout"}
-                    onChange={() => setSearchType("workout")}
-                    />
-                    Workouts
-                </label>
-            </div>
-
-            {searchQuery && (
-                <div className="search-results">
-                    {searchType === "movement" ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                <th>Date</th>
-                                <th>Workout Name</th>
-                                <th>Sets</th>
-                                <th>Reps</th>
-                                <th>Duration</th>
-                                <th>Highest Data</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredData.map((workout) =>
-                                    workout.movements.map((logged) =>
-                                        logged.movement.name.toLowerCase().includes(searchQuery.toLowerCase()) ? (
-                                            <tr key={logged.movement._id}>
+            <div className="content-container"> 
+                <div className="left-side-content">
+                    <div className="search-logged">
+                        <input
+                            type="text"
+                            placeholder={searchType === "movement" ? "Search for a movement" : "Search for a workout"}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        <label>
+                            <input
+                            type="radio"
+                            name="searchType" 
+                            value="movement"
+                            checked={searchType === "movement"}
+                            onChange={() => setSearchType("movement")}
+                            />
+                            Movements
+                        </label>
+                        <label>
+                            <input
+                            type="radio"
+                            name="searchType" 
+                            value="workout"
+                            checked={searchType === "workout"}
+                            onChange={() => setSearchType("workout")}
+                            />
+                            Workouts
+                        </label>
+                    </div>
+                    {searchQuery && (
+                        <div className="search-results">
+                            {searchType === "movement" ? (
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Workout Name</th>
+                                            <th>Sets</th>
+                                            <th>Reps</th>
+                                            <th>Duration</th>
+                                            <th>Highest Data</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredData.map((workout) =>
+                                            workout.movements.map((logged) => (
+                                                <tr key={logged.movement._id}>
+                                                    <td>{new Date(workout.date).toLocaleDateString()}</td>
+                                                    <td>{workout.workouts.name}</td>
+                                                    <td>{logged.sets}</td>
+                                                    <td>{logged.metricValue}</td>
+                                                    <td>{logged.highestData || "N/A"}</td>
+                                                </tr>
+                                            )
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Workout Name</th>
+                                            <th>Movements</th>
+                                            <th>Total Duration</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredData.map((workout) => (
+                                            <tr key={workout._id}>
                                                 <td>{new Date(workout.date).toLocaleDateString()}</td>
                                                 <td>{workout.workouts.name}</td>
-                                                <td>{logged.sets}</td>
-                                                <td>{logged.metricValue}</td>
-                                                <td>{logged.highestData || "N/A"}</td>
+                                                <td>{workout.movements.map((logged) => logged.movement.name).join(" | ")}</td>
+                                                <td>{workout.totalDuration}</td>
+                                                <td>{workout.notes || "N/A"}</td>
                                             </tr>
-                                        ) : null
-                                    )
-                                )}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <table>
-                            <thead>
-                                <tr>
-                                <th>Date</th>
-                                <th>Workout Name</th>
-                                <th>Movements</th>
-                                <th>Total Duration</th>
-                                <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredData.map((workout) => (
-                                        <tr key={workout._id}>
-                                            <td>{new Date(workout.date).toLocaleDateString()}</td>
-                                            <td>{workout.workouts.name}</td>
-                                            <td>{workout.movements.map((logged) => logged.movement.name).join(" | ")}</td>
-                                            <td>{workout.totalDuration}</td>
-                                            <td>{workout.notes || "N/A"}</td>
-                                        </tr>
-                                    )
-                                )}
-                            </tbody>
-                        </table>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
                     )}
                 </div>
-            )}
-
-
-            <div className="highest-data">
-                <h2>Personal Records</h2>
-                <ul>
-                    
-                </ul>
+                <div className="right-side-content">
+                    <div className="streaks">
+                        <h2>Your Logged Workout Streaks</h2>
+                        <p>Longest Streak: {streaks.longest} days</p>
+                        <p>Current Streak: {streaks.current} days</p>
+                    </div>
+                    <div className="highest-data">
+                        <h2>Personal Records</h2>
+                        <ul>
+                            {Object.entries(highestData).map(([name, data]) => (
+                                <li key={name}>{name}: {data.value} (on {new Date(data.date).toLocaleDateString()})</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
-
-            <footer className="streaks">
-                <h2>Your Logged Workout Streaks</h2>
-                <p>Longest Streak: {streaks.longest} days</p>
-                <p>Current Streak: {streaks.current} days</p>
-            </footer>
         </div>
     );
 };

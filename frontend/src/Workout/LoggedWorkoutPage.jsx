@@ -36,7 +36,9 @@ export default function LoggedWorkoutPage() {
   const filteredWorkouts = filterDate
     ? loggedWorkouts.filter((workout) => {
         if (!workout.completedDate) return false;
-        const workoutDate = new Date(workout.completedDate).toLocaleDateString();
+        const workoutDate = new Date(
+          workout.completedDate
+        ).toLocaleDateString();
         return workoutDate.includes(filterDate);
       })
     : loggedWorkouts;
@@ -47,11 +49,11 @@ export default function LoggedWorkoutPage() {
         <button onClick={() => handleChangePage("dashboard")}>Dashboard</button>
         <button onClick={() => handleChangePage("profile")}>My Profile</button>
       </div>
-      
+
       <div className="logged-workout-header">
         <h2>Logged Workouts</h2>
       </div>
-      
+
       <div className="dashboard-flex filter-section">
         <input
           type="text"
@@ -61,7 +63,7 @@ export default function LoggedWorkoutPage() {
           className="date-filter"
         />
       </div>
-      
+
       {loading ? (
         <div className="loading-indicator">Loading...</div>
       ) : (
@@ -78,14 +80,19 @@ export default function LoggedWorkoutPage() {
                   <p className="workout-name">{workout.name}</p>
                   {workout.completedDate && (
                     <p className="workout-date">
-                      Completed: {new Date(workout.completedDate).toLocaleDateString()}
+                      Completed:{" "}
+                      {new Date(workout.completedDate).toLocaleDateString()}
                     </p>
                   )}
                   {workout.duration && (
-                    <p className="workout-duration">Duration: {workout.duration} min</p>
+                    <p className="workout-duration">
+                      Duration: {workout.duration} min
+                    </p>
                   )}
                   {workout.intensity && (
-                    <p className="workout-intensity">Intensity: {workout.intensity}/10</p>
+                    <p className="workout-intensity">
+                      Intensity: {workout.intensity}/10
+                    </p>
                   )}
                 </div>
               </div>
@@ -100,4 +107,4 @@ export default function LoggedWorkoutPage() {
       )}
     </div>
   );
-} 
+}

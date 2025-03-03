@@ -1,164 +1,174 @@
 /* Overall Page Styling */
 .create-workout-page {
-    background-color: #3E3E3E; /* Dark gray background */
-    color: #fff;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Header */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .header-left {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .header-right {
-    font-size: 1rem;
-  }
-  
-  /* Main Content Layout */
-  .main-content {
-    flex: 1;
-    display: flex;
-    padding: 20px;
-  }
-  
-  /* Left Content */
-  .left-content {
-    flex: 2;
-    margin-right: 20px;
-  }
-  
-  /* Right Content */
-  .right-content {
-    flex: 3;
-    margin-left: 20px;
-    border-left: 1px solid #444;
-    padding-left: 20px;
-  }
-  
-  /* Input Row for Name and Body Region */
-  .input-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .label-input-pair {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .label-input-pair label {
-    margin-bottom: 5px;
-    font-weight: 500;
-  }
-  
-  .label-input-pair input,
-  .label-input-pair select {
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  /* Section Titles */
-  .section-title {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  
-  /* Search Input */
-  .search-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  /* Movements List */
-  .movements-list,
-  .current-workout-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Movement Card */
-  .movement-card {
-    position: relative;
-    border-radius: 6px;
-    overflow: hidden;
-    background-color: #3a3a3a;
-    max-width: 100%;
-  }
-  
-  /* Movement Image */
-  .movement-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0.9;
-  }
-  
-  /* Movement Name Text */
-  .movement-name {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 1rem;
-    text-transform: capitalize;
-  }
-  
-  /* Add Button */
-  .add-button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: #fff;
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .add-button:hover {
-    background: #ddd;
-  }
+  background-color: #3e3e3e; /* Dark gray background */
+  color: #fff;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 
-  .footer {
-    display: flex;
-    align-items: center; /* center vertically */
-    justify-content: flex-end; /* push children to the right */
-    padding: 1rem;
-    border-top: 1px solid #ccc;
-  }
-  
-  .next-button {
-    width: 8%;
-    padding: 0.5rem 1rem;
-    background-color:#ccc;
-    border-radius: 20px;
-    font-size: 1rem;
-  }
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.header-left {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header-right {
+  font-size: 1rem;
+}
+
+/* Main Content Layout */
+.main-content {
+  flex: 1;
+  display: flex;
+  padding: 20px;
+}
+
+/* Left Content */
+.left-content {
+  flex: 2;
+  margin-right: 20px;
+}
+
+/* Right Content */
+.right-content {
+  flex: 3;
+  margin-left: 20px;
+  border-left: 1px solid #444;
+  padding-left: 20px;
+}
+
+/* Input Row for Name and Body Region */
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.label-input-pair {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-input-pair label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.label-input-pair input,
+.label-input-pair select {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Search Input */
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Movements List */
+.movements-list,
+.current-workout-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Movement Card */
+.movement-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #3a3a3a;
+  max-width: 100%;
+}
+
+/* Movement Image */
+.movement-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+}
+
+/* Movement Name Text */
+.movement-name {
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.movement-name-2 {
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-transform: capitalize;
+  width: 50%;
+}
+
+/* Add Button */
+.add-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button:hover {
+  background: #ddd;
+}
+
+.footer {
+  display: flex;
+  align-items: center; /* center vertically */
+  justify-content: flex-end; /* push children to the right */
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+}
+
+.next-button {
+  width: 8%;
+  padding: 0.5rem 1rem;
+  background-color: #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
+}

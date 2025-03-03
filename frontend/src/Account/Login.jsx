@@ -20,7 +20,7 @@ export default function Login() {
       if (res) {
         localStorage.setItem("token", JSON.stringify(res.token));
         console.log(localStorage.getItem("token"));
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);

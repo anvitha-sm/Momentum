@@ -8,7 +8,7 @@ export const NavigationBar = () => {
         <nav>
             <div className="list">
             <button className="link" onClick={navigate("/HomePage")}> Home </button>
-            <button className="link" onClick={navigate("/login")}> Log In </button>
+            <button className="link" onClick={navigate("/login")}> Login </button>
             <button className="link" onClick={navigate("/workout")}> Workouts </button>
             <button className="link" onClick={navigate("/account")}> My Account </button>
             </div>

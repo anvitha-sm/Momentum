@@ -299,3 +299,8 @@
 .view-profile-button:hover {
   background-color: #5e35b1;
 }
+
+.user-workouts-head {
+  text-align: center;
+  margin: 20px 0;
+}

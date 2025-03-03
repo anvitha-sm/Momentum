@@ -112,3 +112,190 @@
   font-size: 15px;
   background-color: gray;
 }
+
+.remove-button {
+  justify-content: flex-end;
+  font-size: 15px;
+  background-color: red;
+}
+.add-button {
+  justify-content: flex-end;
+  font-size: 15px;
+  background-color: rgb(48, 192, 48);
+}
+
+.userDisplay {
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 6px;
+  background-color: lightgray;
+  overflow: hidden;
+}
+
+/* User Profile Styles */
+.user-profile-header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.user-profile-header h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.user-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-workouts {
+  margin-top: 20px;
+}
+
+.user-workouts h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Logged Workout Page Styles */
+.logged-workout-header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.filter-section {
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.date-filter {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 14px;
+}
+
+.logged-workout {
+  display: flex;
+  flex-direction: column;
+}
+
+.workout-details {
+  padding: 10px;
+}
+
+.workout-date, .workout-duration, .workout-intensity {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Other User Profile Styles */
+.other-user-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.add-friend-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-friend-button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: #f44336;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.loading-indicator {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.no-workouts-message {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.view-all-logged-workouts {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.view-all-logged-workouts:hover {
+  background-color: #0b7dda;
+}
+
+/* User Display in Find Other Users */
+.userDisplay {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.view-profile-button {
+  background-color: #673AB7;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view-profile-button:hover {
+  background-color: #5e35b1;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllUserWorkoutsAPI } from "../api/api";
+import { getAllUserWorkoutsAPI, getAllLoggedWorkoutsAPI } from "../api/api";
 import "./dashboard.css";
 
 export default function Dashboard() {
@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("myWorkouts");
   const [loading, setLoading] = useState(true);
   const [workouts, setWorkouts] = useState([]);
+  const [loggedWorkouts, setLoggedWorkouts] = useState([]);
   function handleTabChange(tab) {
     setActiveTab(tab);
   }
@@ -23,6 +24,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (token) {
       fetchData();
+      fetchLoggedData();
     }
   }, [token]);
 
@@ -37,48 +39,23 @@ export default function Dashboard() {
     setLoading(false);
   };
 
-  // placeholder for user's logged workouts
-  const loggedWorkouts = [
-    {
-      name: "Lower Body",
-      imageUrl:
-        "https://static.independent.co.uk/2024/09/03/13/how-to-perform-a-barbell-squat-correctly.jpg?width=1200&height=1200&fit=crop",
-    },
-    {
-      name: "Cardio",
-      imageUrl:
-        "https://squatwolf.com/cdn/shop/articles/shutterstock_215163556-min.jpg?v=1719993920",
-    },
-    {
-      name: "Chest/ Back",
-      imageUrl:
-        "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png",
-    },
-    {
-      name: "Shoulders",
-      imageUrl:
-        "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png",
-    },
-    {
-      name: "Shoulders",
-      imageUrl:
-        "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png",
-    },
-    {
-      name: "Shoulders",
-      imageUrl:
-        "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png",
-    },
-    {
-      name: "Shoulders",
-      imageUrl:
-        "https://images.ctfassets.net/hjcv6wdwxsdz/2bQRCnH8foEemorHTvK44n/be6097a413f930f637e3dd3bf905ce6f/lunge.png",
-    },
-  ];
+  console.log(workouts);
+
+  const fetchLoggedData = async () => {
+    setLoading(true);
+    try {
+      const res = await getAllLoggedWorkoutsAPI(token);
+      setLoggedWorkouts(res);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+    setLoading(false);
+  };
 
   const currentWorkouts =
     activeTab === "myWorkouts" ? workouts : loggedWorkouts;
 
+  console.log(loggedWorkouts);
   return (
     <div className="dashboard">
       <div className="dashboard-flex explore">
@@ -114,20 +91,50 @@ export default function Dashboard() {
         </button>
       </div>
       <div className="dashboard-flex workout-list">
-        {currentWorkouts.map((workout) => (
-          <div key={workout._id} className="workout-card">
-            <img
-              src={workout.imageUrl}
-              alt={workout.name}
-              className="workout-image"
-            />
-            <p className="workout-name">{workout.name}</p>
-          </div>
-        ))}
+        {currentWorkouts.map((workout) => {
+          // Determine if we are in 'loggedWorkouts' and thus should pass the entire log
+          const workoutData =
+            activeTab === "loggedWorkouts"
+              ? workout.workouts
+              : workout.workouts || workout;
+          return (
+            <div
+              key={workout._id || workout.loggedId} // Ensure keys are unique with fallbacks
+              className="workout-card"
+              onClick={() => {
+                if (activeTab === "myWorkouts") {
+                  navigate(`/view-workout`, {
+                    state: { workout: workoutData },
+                  });
+                } else if (activeTab === "loggedWorkouts") {
+                  navigate(`/view-log-workout`, {
+                    state: { workout: workout },
+                  });
+                }
+              }}
+            >
+              <img
+                src={
+                  workoutData.imageUrl ||
+                  (workoutData.workout && workoutData.workout.imageUrl)
+                }
+                alt={
+                  workoutData.name ||
+                  (workoutData.workout && workoutData.workout.name)
+                }
+                className="workout-image"
+              />
+              <p className="workout-name">
+                {workoutData.name ||
+                  (workoutData.workout && workoutData.workout.name)}
+              </p>
+            </div>
+          );
+        })}
       </div>
-      
+
       <div className="dashboard-flex navigation-buttons">
-        <button 
+        <button
           className="view-all-logged-workouts"
           onClick={() => handleChangePage("logged-workouts")}
         >

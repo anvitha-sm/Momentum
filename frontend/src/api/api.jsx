@@ -17,7 +17,18 @@ const endpoints = {
   addToSchedule: "/api/schedule/add",
   removeFromSchedule: "/api/schedule/remove",
   getAllLoggedWorkouts: "/api/workouts/logged",
-  logWorkout: "/api/workouts/log"
+  logWorkout: "/api/workouts/log",
+  getMovement: "/api/movements/",
+};
+
+export const getMovementAPI = async (id) => {
+  try {
+    const response = await axios.get(url + endpoints.getMovement + id);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteWorkoutAPI = async (data, token) => {
@@ -60,6 +71,7 @@ export const getAllUserWorkoutsAPI = async (token) => {
 };
 
 export const createWorkoutAPI = async (data, token) => {
+  console.log(data);
   try {
     const response = await axios.post(url + endpoints.createWorkout, data, {
       headers: {
@@ -173,20 +185,24 @@ export const addToScheduleAPI = async (data, token) => {
 
 export const removeFromScheduleAPI = async (data, token) => {
   try {
-    const response = await axios.delete(url + endpoints.removeFromSchedule, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.delete(
+      url + endpoints.removeFromSchedule,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getAllLoggedWorkoutsAPI = async (data, token) => {
+export const getAllLoggedWorkoutsAPI = async (token) => {
   try {
-    const response = await axios.get(url + endpoints.getAllLoggedWorkouts, data, {
+    const response = await axios.get(url + endpoints.getAllLoggedWorkouts, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

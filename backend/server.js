@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 require("./src/collections/User");
 require("./src/collections/Workout");
 require("./src/collections/Movement");
+require("./src/collections/LoggedWorkout");
 
 require("dotenv").config();
 
 const userRouter = require("./src/routes/user");
 const movementsRouter = require("./src/routes/movements");
 const workoutsRouter = require("./src/routes/workouts");
+const loggedWorkoutsRouter = require("./src/routes/loggedWorkouts");
 
 const app = express();
 const PORT = 8080;
@@ -20,6 +22,7 @@ app.use(cors());
 app.use(userRouter);
 app.use(movementsRouter);
 app.use(workoutsRouter);
+app.use(loggedWorkoutsRouter);
 
 mongoose
   .connect(process.env.MONGODB_URI)

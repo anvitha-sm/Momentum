@@ -12,6 +12,7 @@ const userRouter = require("./src/routes/user");
 const movementsRouter = require("./src/routes/movements");
 const workoutsRouter = require("./src/routes/workouts");
 const loggedWorkoutsRouter = require("./src/routes/loggedWorkouts");
+const friendsRouter = require("./src/routes/friends");
 
 const app = express();
 const PORT = 8080;
@@ -23,6 +24,7 @@ app.use(userRouter);
 app.use(movementsRouter);
 app.use(workoutsRouter);
 app.use(loggedWorkoutsRouter);
+app.use(friendsRouter);
 
 mongoose
   .connect(process.env.MONGODB_URI)

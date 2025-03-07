@@ -312,3 +312,47 @@
   text-align: center;
   margin: 20px 0;
 }
+.dropdown-content {
+  position: absolute;
+  background-color: gray;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 10px 0; /* Add padding to the dropdown content */
+}
+
+.dropdown-content ul {
+  list-style-type: none; /* Removes bullet points */
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-content ul li {
+  padding: 8px 16px; /* Add padding for each item */
+  cursor: pointer; /* Change cursor to pointer to indicate clickable items */
+}
+
+.dropdown-content ul li:hover {
+  background-color: gray; /* Hover effect for list items */
+}
+
+.dropdown-content a {
+  padding-top: 10px;
+  padding-left: 10px;
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.close-dropdown {
+  padding: 5px 10px;
+  background-color: lightgray;
+  font-size: 15px;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block; /* Ensures button takes its own line */
+  text-align: center;
+  margin-top: 10px; /* Spacing from the list */
+}

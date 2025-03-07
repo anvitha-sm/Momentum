@@ -3,135 +3,102 @@ import { useNavigate } from "react-router-dom";
 import {
   getAllUserWorkoutsAPI,
   getAllLoggedWorkoutsAPI,
-  getFriendsAPI,
-  getAllUsersAPI,
+  addFriendAPI,
+  getUserDataAPI,
+  removeFriendAPI,
 } from "../api/api";
-import "./dashboard.css";
+import { useLocation } from "react-router-dom";
+import "../Dashboard/dashboard.css";
 
-const Dropdown = ({ show, onClose, children }) => {
-  if (!show) {
-    return null;
-  }
-
-  return (
-    <div className="dropdown-content">
-      {children}
-      <button onClick={onClose} className="close-dropdown">
-        Close
-      </button>
-    </div>
-  );
-};
-
-export default function Dashboard() {
+export default function ViewFriend() {
+  const location = useLocation();
+  const userId = location.state?.user;
+  const isFollowing = location.state?.following;
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("myWorkouts");
-  const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [workouts, setWorkouts] = useState([]);
-  const [loggedWorkouts, setLoggedWorkouts] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  function handleTabChange(tab) {
-    setActiveTab(tab);
-  }
+  const [user, setUser] = useState(null);
+
+  const isFriend = false;
 
   function handleChangePage(page) {
     navigate("/" + page);
   }
 
-  const handleCloseDropdown = () => {
-    setShowDropdown(false); // Function to close the dropdown
-  };
-
-  // placeholder for following
-  const following = ["person1", "person2", "person3"];
+  function goBack() {
+    navigate(-1);
+  }
 
   useEffect(() => {
     if (token) {
       fetchData();
-      fetchLoggedData();
-      fetchFriends();
     }
   }, [token]);
 
   const fetchData = async () => {
     setLoading(true);
+    console.log(userId);
     try {
-      const res = await getAllUserWorkoutsAPI(token);
-      console.log(res);
-      setWorkouts(res);
+      const res = await getUserDataAPI(userId, token);
+      setUser(res);
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
     setLoading(false);
   };
 
-  const fetchLoggedData = async () => {
-    setLoading(true);
+  const handleFollow = async () => {
     try {
-      const res = await getAllLoggedWorkoutsAPI(token);
-      setLoggedWorkouts(res);
+      console.log(user._id);
+      await addFriendAPI({ friendId: user._id }, token);
+      alert("Friend added");
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      console.error("Failed to add friend:", error);
     }
     setLoading(false);
   };
 
-  const fetchFriends = async () => {
-    setLoading(true);
+  const handleUnfollow = async () => {
     try {
-      const res = await getFriendsAPI(token);
-      console.log(res);
-      setFriends(res);
+      console.log(user._id);
+      await removeFriendAPI({ friendId: user._id }, token);
+      alert("Friend removed");
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      console.error("Failed to remove friend:", error);
     }
     setLoading(false);
   };
 
-  const handleFriendClick = (id) => {
-    navigate("/view-friend", {
-      state: { user: id, following: true },
-    });
-  };
-
-  const currentWorkouts =
-    activeTab === "myWorkouts" ? workouts : loggedWorkouts;
-  console.log(friends);
-  console.log(friends.length);
   if (loading) {
     return <p>Loading...</p>;
   }
+
+  const currentWorkouts =
+    activeTab === "myWorkouts" ? user.savedWorkouts : user.loggedWorkouts;
+
+  function handleTabChange(tab) {
+    setActiveTab(tab);
+  }
+
   return (
     <div className="dashboard">
-      <div className="dashboard-flex explore">
-        <button onClick={() => handleChangePage("explore")}>Explore 🔍</button>
-        <button onClick={() => handleChangePage("profile")}>My Profile</button>
-      </div>
-      <div className="dashboard-flex">
-        <button
-          onClick={() => setShowDropdown(!showDropdown)}
-          className="user-info"
-        >
-          Following: {friends.length}
+      <div style={{ display: "flex" }}>
+        <h2 style={{ padding: "20px" }}>{user.name}'s Profile</h2>
+        <button onClick={goBack} className="back-button">
+          Back
         </button>
-        <Dropdown show={showDropdown} onClose={handleCloseDropdown}>
-          {friends.length > 0 && showDropdown && (
-            <ul>
-              {friends.map((friend) => (
-                <li
-                  key={friend._id}
-                  onClick={() => handleFriendClick(friend._id)}
-                >
-                  <a style={{ cursor: "pointer" }}>{friend.username}</a>
-                </li>
-              ))}
-            </ul>
-          )}
-          <a onClick={() => navigate("/find-friend")}>Search for Friends</a>
-        </Dropdown>
-        <p className="user-info">Workouts Complete: {loggedWorkouts.length} </p>
+      </div>
+      <button onClick={isFollowing ? handleUnfollow : handleFollow}>
+        {isFollowing ? "Unfollow" : "Follow"}
+      </button>
+      <div className="dashboard-flex">
+        <p className="user-info">
+          Workouts Complete: {user.loggedWorkouts.length}{" "}
+        </p>
       </div>
       <div className="dashboard-flex workout-toggle">
         <button
@@ -140,7 +107,7 @@ export default function Dashboard() {
           }`}
           onClick={() => handleTabChange("myWorkouts")}
         >
-          My Workouts
+          Workouts
         </button>
         <button
           className={`logged-workout-button ${
@@ -149,12 +116,6 @@ export default function Dashboard() {
           onClick={() => handleTabChange("loggedWorkouts")}
         >
           Logged Workouts
-        </button>
-        <button
-          className="create-workout-button"
-          onClick={() => handleChangePage("createworkout")}
-        >
-          Create Workout
         </button>
       </div>
       <div className="dashboard-flex workout-list">
@@ -198,15 +159,6 @@ export default function Dashboard() {
             </div>
           );
         })}
-      </div>
-
-      <div className="dashboard-flex navigation-buttons">
-        <button
-          className="view-all-logged-workouts"
-          onClick={() => handleChangePage("logged-workouts")}
-        >
-          View All Logged Workouts
-        </button>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ const { celebrate, Joi, isCelebrateError } = require("celebrate");
 const User = mongoose.model("user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const authenticate = require("../middleware/authenticate");
 require("dotenv").config();
 
 const celebrateErrorHandler = (error, req, res, next) => {
@@ -133,6 +134,43 @@ router.get("/api/users", async (req, res) => {
     res.json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/api/user/friends", authenticate, async (req, res) => {
+  try {
+    const userId = req.user;
+    const user = await mongoose
+      .model("user")
+      .findById(userId)
+      .populate("friends")
+      .exec();
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user.friends);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error });
+  }
+});
+
+router.get("/api/user/:id", authenticate, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+      .populate("savedWorkouts")
+      .populate({
+        path: "loggedWorkouts",
+        populate: {
+          path: "workouts",
+          model: "workout",
+        },
+      });
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).send({ message: "Server error", error });
   }
 });
 

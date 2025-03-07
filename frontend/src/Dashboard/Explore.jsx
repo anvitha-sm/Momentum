@@ -61,16 +61,13 @@ function Explore() {
       console.error("Failed to add workout:", error);
     }
   };
-  //add back filtering by body region when added to database
+  console.log(workouts);
 
   // filters by name or body region
-  // const filteredWorkouts = workouts.filter(
-  //   (workout) =>
-  //     workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //     workout.bodyRegion.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
-  const filteredWorkouts = workouts.filter((workout) =>
-    workout.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredWorkouts = workouts.filter(
+    (workout) =>
+      workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      workout.bodyRegion.toLowerCase().includes(searchQuery.toLowerCase())
   );
   return (
     <div className="dashboard explore-page">
@@ -89,14 +86,28 @@ function Explore() {
       />
       <div className="dashboard-flex workout-list">
         {filteredWorkouts.map((workout) => (
-          <div key={workout._id} className="workout-card">
+          <div
+            key={workout._id}
+            className="workout-card"
+            onClick={() =>
+              navigate(`/view-workout`, {
+                state: { workout: workout },
+              })
+            }
+          >
             <img
               src={workout.imageUrl}
               alt={workout.name}
               className="workout-image"
             />
             <p className="workout-name">{workout.name}</p>
-            <button className="add-button" onClick={() => toggleAdd(workout)}>
+            <button
+              className="add-button"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent click from propagating to the parent div
+                toggleAdd(workout);
+              }}
+            >
               {addedWorkouts.has(workout._id) ? "-" : "+"}
             </button>
           </div>

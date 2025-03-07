@@ -11,13 +11,54 @@ const endpoints = {
   saveWorkout: "/api/workouts/:workoutId/save",
   deleteWorkout: "/api/workouts/:workoutId/delete",
   getAllUsers: "/api/users",
-  addFriend: "/api/friends/:friendId/add",
-  removeFriend: "/api/friends/:friendId/remove",
+  addFriend: "/api/friends/add",
+  removeFriend: "/api/friends/remove",
   getSchedule: "/api/schedule",
   addToSchedule: "/api/schedule/add",
   removeFromSchedule: "/api/schedule/remove",
   getAllLoggedWorkouts: "/api/workouts/logged",
-  logWorkout: "/api/workouts/log"
+  logWorkout: "/api/workouts/log",
+  getMovement: "/api/movements/",
+  getFriends: "/api/user/friends",
+  getUserData: "/api/user/",
+};
+
+export const getUserDataAPI = async (id, token) => {
+  try {
+    const response = await axios.get(url + endpoints.getUserData + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getFriendsAPI = async (token) => {
+  try {
+    const response = await axios.get(url + endpoints.getFriends, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMovementAPI = async (id) => {
+  try {
+    const response = await axios.get(url + endpoints.getMovement + id);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteWorkoutAPI = async (data, token) => {
@@ -60,6 +101,7 @@ export const getAllUserWorkoutsAPI = async (token) => {
 };
 
 export const createWorkoutAPI = async (data, token) => {
+  console.log(data);
   try {
     const response = await axios.post(url + endpoints.createWorkout, data, {
       headers: {
@@ -121,27 +163,30 @@ export const getAllUsersAPI = async () => {
 
 export const addFriendAPI = async (data, token) => {
   try {
-    const response = await axios.post(url + endpoints.addFriend, data, {
+    await axios.post(url + endpoints.addFriend, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const removeFriendAPI = async (data, token) => {
+export const removeFriendAPI = async (userId, token) => {
   try {
-    const response = await axios.delete(url + endpoints.removeFriend, data, {
+    await axios({
+      method: "delete",
+      url: url + endpoints.removeFriend,
+      data: userId,
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     });
-    return response.data;
   } catch (error) {
-    console.log(error);
+    console.error("Error removing friend:", error);
+    throw error;
   }
 };
 
@@ -173,20 +218,24 @@ export const addToScheduleAPI = async (data, token) => {
 
 export const removeFromScheduleAPI = async (data, token) => {
   try {
-    const response = await axios.delete(url + endpoints.removeFromSchedule, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.delete(
+      url + endpoints.removeFromSchedule,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getAllLoggedWorkoutsAPI = async (data, token) => {
+export const getAllLoggedWorkoutsAPI = async (token) => {
   try {
-    const response = await axios.get(url + endpoints.getAllLoggedWorkouts, data, {
+    const response = await axios.get(url + endpoints.getAllLoggedWorkouts, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

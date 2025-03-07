@@ -64,6 +64,12 @@
   object-fit: cover;
 }
 
+.movement-image-2 {
+  width: 50%;
+  height: 200px;
+  object-fit: cover;
+}
+
 .workout-name {
   position: absolute;
   bottom: 10px;
@@ -112,17 +118,17 @@
   font-size: 15px;
   background-color: gray;
 }
-
+/* 
 .remove-button {
   justify-content: flex-end;
   font-size: 15px;
   background-color: red;
-}
-.add-button {
+} */
+/* .add-button {
   justify-content: flex-end;
   font-size: 15px;
   background-color: rgb(48, 192, 48);
-}
+} */
 
 .userDisplay {
   box-sizing: border-box;
@@ -198,7 +204,9 @@
   padding: 10px;
 }
 
-.workout-date, .workout-duration, .workout-intensity {
+.workout-date,
+.workout-duration,
+.workout-intensity {
   font-size: 14px;
   color: #666;
   margin-top: 5px;
@@ -218,7 +226,7 @@
 }
 
 .add-friend-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -259,7 +267,7 @@
 }
 
 .view-all-logged-workouts {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -288,7 +296,7 @@
 }
 
 .view-profile-button {
-  background-color: #673AB7;
+  background-color: #673ab7;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -298,4 +306,53 @@
 
 .view-profile-button:hover {
   background-color: #5e35b1;
+}
+
+.user-workouts-head {
+  text-align: center;
+  margin: 20px 0;
+}
+.dropdown-content {
+  position: absolute;
+  background-color: gray;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 10px 0; /* Add padding to the dropdown content */
+}
+
+.dropdown-content ul {
+  list-style-type: none; /* Removes bullet points */
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-content ul li {
+  padding: 8px 16px; /* Add padding for each item */
+  cursor: pointer; /* Change cursor to pointer to indicate clickable items */
+}
+
+.dropdown-content ul li:hover {
+  background-color: gray; /* Hover effect for list items */
+}
+
+.dropdown-content a {
+  padding-top: 10px;
+  padding-left: 10px;
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.close-dropdown {
+  padding: 5px 10px;
+  background-color: lightgray;
+  font-size: 15px;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block; /* Ensures button takes its own line */
+  text-align: center;
+  margin-top: 10px; /* Spacing from the list */
 }

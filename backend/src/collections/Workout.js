@@ -5,18 +5,14 @@ const WorkoutSchema = new mongoose.Schema({
   description: { type: String },
   bodyRegion: { type: String },
   movements: [
-    { 
+    {
       movement: { type: mongoose.Schema.Types.ObjectId, ref: "Movement" },
-      sets: { type: Number, default: 1},
-      reps: { type: Number, default: null },
-      duration: { type: Number, default: null }
-    }
+      sets: { type: Number, required: true },
+      metricType: { type: String },
+      metricValue: { type: Number, default: 1 },
+    },
   ],
   imageUrl: { type: String },
 });
-
-WorkoutSchema.path("movements").validate((movements) => {
-  return movements.every((move) => move.reps === null != move.duration === null);
-}, "Reps OR duration exclusively is required for each movement")
 
 mongoose.model("workout", WorkoutSchema);

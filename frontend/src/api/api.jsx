@@ -9,7 +9,7 @@ const endpoints = {
   createWorkout: "/api/workouts/create",
   getAllUserWorkouts: "/api/workouts/saved",
   saveWorkout: "/api/workouts/:workoutId/save",
-  deleteWorkout: "/api/workouts/:workoutId/delete",
+  deleteWorkout: "/api/workouts/delete/",
   getAllUsers: "/api/users",
   addFriend: "/api/friends/add",
   removeFriend: "/api/friends/remove",
@@ -63,7 +63,7 @@ export const getMovementAPI = async (id) => {
 
 export const deleteWorkoutAPI = async (data, token) => {
   try {
-    const response = await axios.delete(url + endpoints.deleteWorkout, data, {
+    const response = await axios.delete(url + endpoints.deleteWorkout + data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

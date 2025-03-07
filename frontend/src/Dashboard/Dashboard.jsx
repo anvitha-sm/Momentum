@@ -4,7 +4,7 @@ import {
   getAllUserWorkoutsAPI,
   getAllLoggedWorkoutsAPI,
   getFriendsAPI,
-  getAllUsersAPI,
+  deleteWorkoutAPI,
 } from "../api/api";
 import "./dashboard.css";
 
@@ -43,9 +43,6 @@ export default function Dashboard() {
   const handleCloseDropdown = () => {
     setShowDropdown(false); // Function to close the dropdown
   };
-
-  // placeholder for following
-  const following = ["person1", "person2", "person3"];
 
   useEffect(() => {
     if (token) {
@@ -88,6 +85,18 @@ export default function Dashboard() {
       console.error("Failed to fetch data:", error);
     }
     setLoading(false);
+  };
+
+  const removeWorkout = async (id) => {
+    try {
+      await deleteWorkoutAPI(id, token); // Assuming this API call deletes the workout
+      alert("Workout removed");
+      // Filter out the removed workout from the workouts state
+      const updatedWorkouts = workouts.filter((workout) => workout._id !== id);
+      setWorkouts(updatedWorkouts);
+    } catch (error) {
+      console.error("Failed to remove the workout:", error);
+    }
   };
 
   const handleFriendClick = (id) => {
@@ -159,11 +168,11 @@ export default function Dashboard() {
       </div>
       <div className="dashboard-flex workout-list">
         {currentWorkouts.map((workout) => {
-          // Determine if we are in 'loggedWorkouts' and thus should pass the entire log
           const workoutData =
             activeTab === "loggedWorkouts"
               ? workout.workouts
               : workout.workouts || workout;
+
           return (
             <div
               key={workout._id || workout.loggedId} // Ensure keys are unique with fallbacks
@@ -195,6 +204,17 @@ export default function Dashboard() {
                 {workoutData.name ||
                   (workoutData.workout && workoutData.workout.name)}
               </p>
+              {activeTab === "myWorkouts" && (
+                <button
+                  className="add-button"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent the navigation to the workout details
+                    removeWorkout(workout._id);
+                  }}
+                >
+                  -
+                </button>
+              )}
             </div>
           );
         })}

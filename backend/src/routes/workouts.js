@@ -89,7 +89,7 @@ router.post("/api/workouts/:workoutId/save", authenticate, async (req, res) => {
 
 // Delete a workout (from user-saved)
 router.delete(
-  "/api/workouts/:workoutId/delete",
+  "/api/workouts/delete/:workoutId",
   authenticate,
   async (req, res) => {
     try {
@@ -104,6 +104,7 @@ router.delete(
         (id) => id.toString() !== workoutId
       );
       await user.save();
+      return res.json("deleted");
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

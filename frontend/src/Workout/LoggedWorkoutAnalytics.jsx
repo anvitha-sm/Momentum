@@ -146,7 +146,7 @@ const LoggedWorkoutAnalytics = () => {
                                                 <tr key={logged.movement._id}>
                                                     <td>{new Date(workout.date).toLocaleDateString()}</td>
                                                     <td>{workout.workouts.name}</td>
-                                                    <td>{workout.movements.map((logged) => logged.movement.name).join(" | ")}</td>
+                                                    <td>{logged.movement.name}</td>
                                                     <td>{logged.sets}</td>
                                                     <td>{logged.metricValue}</td>
                                                     <td>{logged.highestData || "N/A"}</td>

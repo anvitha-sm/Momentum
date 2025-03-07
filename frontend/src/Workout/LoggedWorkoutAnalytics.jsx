@@ -22,9 +22,10 @@ const LoggedWorkoutAnalytics = () => {
         setLoading(true);
         try {
             const res = await getAllLoggedWorkoutsAPI(token);
-            setLoggedWorkouts(res);
-            calculateHighestData(res);
-            calculateStreaks(res);
+            const sorted = res.sort((a, b) => new Date(b.date) - new Date(a.date));
+            setLoggedWorkouts(sorted);
+            calculateHighestData(sorted);
+            calculateStreaks(sorted);
         } catch (error) {
             console.error("Failed to fetch data:", error);
         }
@@ -63,7 +64,9 @@ const LoggedWorkoutAnalytics = () => {
     };
 
     useEffect(() => {
+        console.log(searchQuery);
         if (searchQuery) {
+            console.log(searchQuery.trim() === "");
             if (searchType === "movement") {
                 setFilteredData(
                     loggedWorkouts.filter((workout) =>
@@ -77,13 +80,15 @@ const LoggedWorkoutAnalytics = () => {
                       })
                     )
                   );
+                  console.log(filteredData);
             } else {
                 setFilteredData(loggedWorkouts.filter((workout) =>
                     workout.workouts.name.toLowerCase().includes(searchQuery.toLowerCase())
                 ));
             }
         } else {
-            setFilteredData([]);
+            setFilteredData(loggedWorkouts);
+            console.log(filteredData);
         }
     }, [searchQuery, searchType, loggedWorkouts]);
 
@@ -122,7 +127,6 @@ const LoggedWorkoutAnalytics = () => {
                             Workouts
                         </label>
                     </div>
-                    {searchQuery && (
                         <div className="search-results">
                             {searchType === "movement" ? (
                                 <table>
@@ -130,9 +134,9 @@ const LoggedWorkoutAnalytics = () => {
                                         <tr>
                                             <th>Date</th>
                                             <th>Workout Name</th>
+                                            <th>Movements</th>
                                             <th>Sets</th>
-                                            <th>Reps</th>
-                                            <th>Duration</th>
+                                            <th>Reps/Duration</th>
                                             <th>Highest Data</th>
                                         </tr>
                                     </thead>
@@ -142,6 +146,7 @@ const LoggedWorkoutAnalytics = () => {
                                                 <tr key={logged.movement._id}>
                                                     <td>{new Date(workout.date).toLocaleDateString()}</td>
                                                     <td>{workout.workouts.name}</td>
+                                                    <td>{workout.movements.map((logged) => logged.movement.name).join(" | ")}</td>
                                                     <td>{logged.sets}</td>
                                                     <td>{logged.metricValue}</td>
                                                     <td>{logged.highestData || "N/A"}</td>
@@ -175,7 +180,6 @@ const LoggedWorkoutAnalytics = () => {
                                 </table>
                             )}
                         </div>
-                    )}
                 </div>
                 <div className="right-side-content">
                     <div className="streaks">

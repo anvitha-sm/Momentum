@@ -23,6 +23,9 @@ function NavBar() {
         <li>
           <NavLink to="/logged-analytics">Your Stats</NavLink>
         </li>
+        <li>
+          <NavLink to="/schedule">Schedule</NavLink>
+        </li>
       </ul>
       <SpotifyLogin />
     </nav>

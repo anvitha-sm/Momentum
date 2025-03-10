@@ -1,0 +1,64 @@
+/* Reset default margins and padding on html/body */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Make the container fill the entire page */
+  .schedule-container {
+    min-height: 100vh;      /* Fill the vertical space of the viewport */
+    width: 100%;            /* Full width */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box;  /* Include padding in width/height calculations */
+    color: #fff;
+    background-color: #333;
+  }
+  
+  .schedule-row {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+  }
+  
+  .day-label {
+    width: 120px;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  
+  .workouts-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .workout-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #444;
+    border-radius: 6px;
+    padding: 1rem;
+    min-width: 120px;
+  }
+  
+  .workout-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .workout-name {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .no-workout {
+    font-style: italic;
+    color: #ccc;
+  }

@@ -7,6 +7,8 @@ const UserGoals = () => {
     const [movements, setMovements] = useState([]);
     const [userGoals, setUserGoals] = useState({});
     const [goalInputs, setGoalInputs] = useState({});
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
         if (token) {
@@ -36,6 +38,17 @@ const UserGoals = () => {
             console.error(error);
         }
     };
+    
+    useEffect(() => {
+        if (searchQuery) {
+            setFilteredData(movements.filter((movement) =>
+                movement.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
+        } else {
+            setFilteredData(movements);
+            console.log(filteredData);
+        }
+    }, [searchQuery, movements]);
 
     const handleGoalChange = (movementId, value) => {
         setGoalInputs((prevState) => ({
@@ -60,8 +73,14 @@ const UserGoals = () => {
     return (
         <div className="all-movement-goals">
             <h1>Set Your Movement Goals</h1>
+            <input
+                type="text"
+                placeholder={"Search for a movement"}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <div className="all-movements">
-                {movements.map((movement) => (
+                {filteredData.map((movement) => (
                     <div key={movement._id} className="movement-card">
                         <h3>{movement.name}</h3>
                         <div className="goal-input">

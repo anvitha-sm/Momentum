@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAllLoggedWorkoutsAPI } from "../api/api.jsx";
+import { getAllLoggedWorkoutsAPI, getUserGoalsAPI, getAllMovementsAPI } from "../api/api.jsx";
 import './LoggedWorkoutAnalytics.css';
 
 const LoggedWorkoutAnalytics = () => {
@@ -11,10 +11,14 @@ const LoggedWorkoutAnalytics = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [highestData, setHighestData] = useState({});
     const [streaks, setStreaks] = useState({ longest: 0, current: 0 });
+    const [goals, setGoals] = useState([]);
+    const [movements, setMovements] = useState([]);
 
     useEffect(() => {
         if (token) {
             fetchData();
+            fetchGoals();
+            fetchMovements();
         }
     }, [token]);
 
@@ -27,9 +31,27 @@ const LoggedWorkoutAnalytics = () => {
             calculateHighestData(sorted);
             calculateStreaks(sorted);
         } catch (error) {
-            console.error("Failed to fetch data:", error);
+            console.error(error);
         }
         setLoading(false);
+    };
+
+    const fetchGoals = async () => {
+        try {
+            const res = await getUserGoalsAPI(token); 
+            setGoals(res); 
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchMovements = async () => {
+        try {
+            const res = await getAllMovementsAPI(token); 
+            setMovements(res); 
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const calculateHighestData = (loggedWorkouts) => {
@@ -193,6 +215,19 @@ const LoggedWorkoutAnalytics = () => {
                             {Object.entries(highestData).map(([name, data]) => (
                                 <li key={name}>{name}: {data.value} (on {new Date(data.date).toLocaleDateString()})</li>
                             ))}
+                        </ul>
+                    </div>
+                    <div className="your-goals">
+                        <h2>Your Goals</h2>
+                        <ul>
+                            {goals.map((goal, index) => {
+                                const movement = movements.find((m) => m._id === goal.movement); 
+                                return (
+                                    <li key={index}>
+                                        {movement ? movement.name : 'Undefined'}: {goal.goal}
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>

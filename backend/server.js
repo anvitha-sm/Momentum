@@ -13,6 +13,7 @@ const movementsRouter = require("./src/routes/movements");
 const workoutsRouter = require("./src/routes/workouts");
 const loggedWorkoutsRouter = require("./src/routes/loggedWorkouts");
 const friendsRouter = require("./src/routes/friends");
+const goalsRouter = require("./src/routes/userGoals");
 
 const app = express();
 const PORT = 8080;
@@ -20,6 +21,7 @@ const PORT = 8080;
 app.use(express.json());
 app.use(cors());
 
+app.use(goalsRouter);
 app.use(userRouter);
 app.use(movementsRouter);
 app.use(workoutsRouter);

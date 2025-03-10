@@ -20,6 +20,8 @@ const endpoints = {
   logWorkout: "/api/workouts/log",
   getMovement: "/api/movements/",
   getFriends: "/api/user/friends",
+  getUserGoals: "/api/user/goals",
+  saveUserGoals: "/api/user/goals/save",
   getUserData: "/api/user/",
 };
 
@@ -249,6 +251,35 @@ export const getAllLoggedWorkoutsAPI = async (token) => {
 export const logWorkoutAPI = async (data, token) => {
   try {
     const response = await axios.post(url + endpoints.logWorkout, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserGoalsAPI = async (token) => {
+  try {
+    console.log(url + endpoints.getUserGoals);
+    const response = await axios.get(url + endpoints.getUserGoals, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const saveUserGoalAPI = async (data, token) => {
+  try {
+    const response = await axios.post(url + endpoints.saveUserGoals, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

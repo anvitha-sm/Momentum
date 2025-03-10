@@ -16,6 +16,12 @@ function NavBar() {
         <li>
           <NavLink to="/explore">Explore</NavLink>
         </li>
+        <li>
+          <NavLink to="/goals">Goals</NavLink>
+        </li>
+        <li>
+          <NavLink to="/logged-analytics">Your Stats</NavLink>
+        </li>
       </ul>
     </nav>
   );

@@ -16,6 +16,7 @@ import NavBar from "./NavBar";
 import ViewFriend from "./Friends/ViewFriend";
 import FindFriends from "./Friends/FindFriends";
 import LoggedWorkoutAnalytics from "./Workout/LoggedWorkoutAnalytics";
+import UserGoals from "./userGoals";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/view-friend" element={<ViewFriend />} />
         <Route path="/find-friend" element={<FindFriends />} />
         <Route path="/logged-analytics" element={<LoggedWorkoutAnalytics />} />
+        <Route path="/goals" element={<UserGoals />} />
       </Routes>
     </>
   );

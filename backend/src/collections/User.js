@@ -17,8 +17,12 @@ const UserSchema = new mongoose.Schema({
     sunday: [{ type: mongoose.Schema.Types.ObjectId, ref: "workout" }],
   },
   loggedWorkouts: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "LoggedWorkout" },
+    { type: mongoose.Schema.Types.ObjectId, ref: "LoggedWorkout" }
   ],
+  goals: [{
+    movement: { type: mongoose.Schema.Types.ObjectId, ref: "Movement" },
+    goal: { type: Number }
+  }]
 });
 
 mongoose.model("user", UserSchema);

@@ -24,15 +24,18 @@ const UserGoals = () => {
             setMovements(movementsData);
             setUserGoals(userGoalsData);
 
-            const initialGoalInputs = movementsData.reduce((acc, movement) => {
-                if (userGoalsData?.[movement._id]) {
-                    acc[movement._id] = userGoalsData[movement._id];
-                } else {
-                    acc[movement._id] = ""
-                }
-                return acc;
-            }, {});
+            const initialGoalInputs = {};
 
+            movementsData.forEach((movement) => {
+                const userGoal = userGoalsData.find(goal => goal.movement === movement._id);
+                console.log(movement)
+                console.log(userGoal)
+                if (userGoal) {
+                    initialGoalInputs[movement._id] = userGoal.goal;
+                } else {
+                    initialGoalInputs[movement._id] = "";
+                }
+            });
             setGoalInputs(initialGoalInputs);
         } catch (error) {
             console.error(error);

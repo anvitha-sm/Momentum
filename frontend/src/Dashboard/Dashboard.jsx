@@ -228,6 +228,15 @@ export default function Dashboard() {
           View All Logged Workouts
         </button>
       </div>
+      
+      <div className="dashboard-flex navigation-buttons">
+        <button 
+          className="view-all-logged-workouts"
+          onClick={() => handleChangePage("logged-workouts")}
+        >
+          View All Logged Workouts
+        </button>
+      </div>
     </div>
   );
 }

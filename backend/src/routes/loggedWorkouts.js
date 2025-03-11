@@ -67,8 +67,13 @@ router.get("/api/workouts/logged", authenticate, async (req, res) => {
     const savedWorkouts = await LoggedWorkout.find({
       _id: { $in: user.loggedWorkouts },
     })
-      .populate("workouts") // This will populate the 'workouts' field
-      .exec();
+    .populate("workouts")
+    .populate({
+      path: "movements",
+      populate: {
+        path: "movement",
+        model: "movement",
+      }});
     res.status(200).json(savedWorkouts);
   } catch (error) {
     res.status(500).json({ error: error.message });

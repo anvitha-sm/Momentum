@@ -1,0 +1,15 @@
+.content-container {
+    display: flex; 
+    width: 100%;
+  }
+  
+.left-side-content {
+    flex: 1;
+}
+
+.right-side-content {
+    width: 400px;
+    margin-left: 10px;
+    flex-direction: column; 
+}
+

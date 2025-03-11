@@ -36,9 +36,7 @@ export default function LoggedWorkoutPage() {
   const filteredWorkouts = filterDate
     ? loggedWorkouts.filter((workout) => {
         if (!workout.completedDate) return false;
-        const workoutDate = new Date(
-          workout.completedDate
-        ).toLocaleDateString();
+        const workoutDate = new Date(workout.completedDate).toLocaleDateString();
         return workoutDate.includes(filterDate);
       })
     : loggedWorkouts;
@@ -63,7 +61,7 @@ export default function LoggedWorkoutPage() {
           className="date-filter"
         />
       </div>
-
+      
       {loading ? (
         <div className="loading-indicator">Loading...</div>
       ) : (
@@ -107,4 +105,4 @@ export default function LoggedWorkoutPage() {
       )}
     </div>
   );
-}
+} 

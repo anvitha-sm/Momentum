@@ -32,6 +32,7 @@ export default function LogWorkout() {
               metricValue: m.metricValue,
               setsActual: "", // User input for actual sets
               repsActual: "", // User input for actual reps
+              highest: ""
             };
           })
         );
@@ -65,6 +66,7 @@ export default function LogWorkout() {
             sets: m.setsActual,
             metricType: m.metricType,
             metricValue: m.repsActual,
+            highestData: m.highest
           })),
         },
         token
@@ -116,6 +118,17 @@ export default function LogWorkout() {
                 value={item.repsActual}
                 onChange={(e) =>
                   handleInputChange(index, "repsActual", e.target.value)
+                }
+              />
+            </p>
+            <p>
+              {" "}
+              Best data (today):{" "}
+              <input
+                type="number"
+                value={item.highest}
+                onChange={(e) =>
+                  handleInputChange(index, "highest", e.target.value)
                 }
               />
             </p>

@@ -35,6 +35,7 @@ export default function ViewLoggedWorkout() {
               sets: m.sets,
               metricType: m.metricType,
               metricValue: m.metricValue,
+              highestData: m.highestData
             }))
           )
         );
@@ -96,6 +97,7 @@ export default function ViewLoggedWorkout() {
               {movement.metricType}: {movement.metricValue}
               {movement.metricType === "duration" ? " minutes" : ""}
             </p>
+            <p>Best Data: {movement.highestData}</p>
           </div>
         ))}
       </div>

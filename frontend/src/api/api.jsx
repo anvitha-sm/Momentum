@@ -13,8 +13,8 @@ const endpoints = {
   getAllUsers: "/api/users",
   addFriend: "/api/friends/add",
   removeFriend: "/api/friends/remove",
-  getSchedule: "/api/schedule",
-  addToSchedule: "/api/schedule/add",
+  getSchedule: "/api/users/schedule/get",
+  addToSchedule: "/api/users/schedule/add",
   removeFromSchedule: "/api/schedule/remove",
   getAllLoggedWorkouts: "/api/workouts/logged",
   logWorkout: "/api/workouts/log",
@@ -53,9 +53,13 @@ export const getFriendsAPI = async (token) => {
   }
 };
 
-export const getMovementAPI = async (id) => {
+export const getMovementAPI = async (id, token) => {
   try {
-    const response = await axios.get(url + endpoints.getMovement + id);
+    const response = await axios.get(url + endpoints.getMovement + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(response);
     return response.data;
   } catch (error) {
@@ -192,9 +196,9 @@ export const removeFriendAPI = async (userId, token) => {
   }
 };
 
-export const getScheduleAPI = async (data, token) => {
+export const getScheduleAPI = async (token) => {
   try {
-    const response = await axios.get(url + endpoints.getSchedule, data, {
+    const response = await axios.get(url + endpoints.getSchedule, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -206,6 +210,7 @@ export const getScheduleAPI = async (data, token) => {
 };
 
 export const addToScheduleAPI = async (data, token) => {
+  console.log(data);
   try {
     const response = await axios.post(url + endpoints.addToSchedule, data, {
       headers: {
@@ -220,19 +225,35 @@ export const addToScheduleAPI = async (data, token) => {
 
 export const removeFromScheduleAPI = async (data, token) => {
   try {
-    const response = await axios.delete(
-      url + endpoints.removeFromSchedule,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
+    await axios({
+      method: "delete",
+      url: url + endpoints.removeFromSchedule,
+      data: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
-    console.log(error);
+    console.error("Error removing:", error);
+    throw error;
   }
+  // console.log(token);
+  // try {
+  //   const response = await axios.delete(
+  //     url + endpoints.removeFromSchedule,
+  //     data,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+  //   return response.data;
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };
 
 export const getAllLoggedWorkoutsAPI = async (token) => {

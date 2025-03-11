@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ViewLoggedWorkout() {
   const location = useLocation();
+  const token = localStorage.getItem("token");
   const workout = location.state?.workout;
   const [movements, setMovements] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,34 +25,11 @@ export default function ViewLoggedWorkout() {
   }
 
   useEffect(() => {
-    console.log(workout);
-    const fetchMovements = async () => {
-      if (workout?.movements) {
-        setLoading(true);
-        const movementsDetails = await Promise.all(
-          workout.movements.map((m) =>
-            getMovementAPI(m.movement).then((detail) => ({
-              ...detail,
-              sets: m.sets,
-              metricType: m.metricType,
-              metricValue: m.metricValue,
-              highestData: m.highestData
-            }))
-          )
-        );
-        console.log(movementsDetails);
-        setMovements(movementsDetails);
-        setLoading(false);
-      }
-    };
-    console.log(workout);
-
-    fetchMovements();
-  }, [workout]);
+    setMovements(workout.movements);
+  }, []);
 
   if (loading) return <div>Loading...</div>;
   if (!workout) return <div>No workout found.</div>;
-  console.log(workout);
   return (
     <div style={{ padding: "20px" }} className="dashboard workout-detail">
       <div className="dashboard-flex explore-title">
@@ -75,7 +53,7 @@ export default function ViewLoggedWorkout() {
       <ul>
         {movements.map((item, index) => (
           <li key={index}>
-            {item.name} - sets: {item.sets}, {item.metricType}:{" "}
+            {item.movement.name} - sets: {item.sets}, {item.metricType}:{" "}
             {item.metricValue}{" "}
             {item.metricType === "duration" ? " minutes" : ""}
           </li>
@@ -84,13 +62,13 @@ export default function ViewLoggedWorkout() {
 
       <div className="movements-list">
         {movements.map((movement) => (
-          <div key={movement.name} className="movement-card">
+          <div key={movement.movement._id} className="movement-card">
             <img
-              src={movement.imageUrl}
-              alt={movement.name}
+              src={movement.movement.imageUrl}
+              alt={movement.movement.name}
               className="movement-image-2"
             />
-            <p className="movement-name-2">{movement.name}</p>
+            <p className="movement-name-2">{movement.movement.name}</p>
             <p>Muscle Group: {movement.muscleGroup}</p>
             <p>Sets: {movement.sets}</p>
             <p>

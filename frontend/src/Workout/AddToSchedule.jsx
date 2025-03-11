@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllWorkoutsAPI, saveWorkoutAPI } from "../api/api";
-import "./dashboard.css";
+import {
+  getAllWorkoutsAPI,
+  saveWorkoutAPI,
+  addToScheduleAPI,
+} from "../api/api";
+import "../Dashboard/dashboard.css";
 
-function Explore() {
+function AddToSchedule(props) {
   const token = localStorage.getItem("token");
   const [searchQuery, setSearchQuery] = useState("");
   const [addedWorkouts, setAddedWorkouts] = useState(new Set());
@@ -27,34 +31,18 @@ function Explore() {
     }
     setLoading(false);
   };
-
-  function goBack() {
-    navigate(-1);
-  }
-
-  function toggleAdd(workout) {
-    const newAddedWorkouts = new Set(addedWorkouts);
-    if (newAddedWorkouts.has(workout._id)) {
-      newAddedWorkouts.delete(workout._id);
-    } else {
-      newAddedWorkouts.add(workout._id);
-    }
-    setAddedWorkouts(newAddedWorkouts);
-  }
-
-  const addSelectedWorkouts = async () => {
+  const addWorkout = async (workout) => {
     try {
-      for (const workout of addedWorkouts) {
-        await saveWorkoutAPI(
-          {
-            workoutId: workout,
-          },
-          token
-        );
-      }
-
-      alert("All workouts added successfully!");
-      navigate("/dashboard");
+      await addToScheduleAPI(
+        {
+          day: props.day,
+          workoutId: workout,
+        },
+        token
+      );
+      props.onWorkoutAdded();
+      //console.log(onWorkoutAdded());
+      alert("workouts added successfully!");
     } catch (error) {
       console.error("Failed to add workout:", error);
     }
@@ -69,10 +57,7 @@ function Explore() {
   return (
     <div className="dashboard explore-page">
       <div className="dashboard-flex explore-title">
-        <h1>Explore 🔍</h1>
-        <button onClick={goBack} className="back-button">
-          Back
-        </button>
+        <h1>Add to {props.day}</h1>
       </div>
       <input
         type="text"
@@ -102,21 +87,17 @@ function Explore() {
               className="add-button"
               onClick={(e) => {
                 e.stopPropagation(); // Prevent click from propagating to the parent div
-                toggleAdd(workout);
+                addWorkout(workout._id);
               }}
             >
-              {addedWorkouts.has(workout._id) ? "-" : "+"}
+              +
             </button>
           </div>
         ))}
       </div>
-      <div className="dashboard-flex add-selected">
-        <button onClick={addSelectedWorkouts} className="add-selected-button">
-          Add Selected Workouts
-        </button>
-      </div>
+      <div className="dashboard-flex add-selected"></div>
     </div>
   );
 }
 
-export default Explore;
+export default AddToSchedule;

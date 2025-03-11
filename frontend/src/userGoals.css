@@ -1,18 +1,18 @@
 .all-movement-goals input[type="text"] {
-    border: 3px solid #6c3483;
+  border: 3px solid #6c3483;
 }
 
 .all-movements {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
-.movement-card {
-    background-color: #edb8ff;
-    text-align: center;
+.movement-card-goal {
+  background-color: #edb8ff;
+  text-align: center;
 }
 
 .goal-input input {
-    width: 80%;
-    border: 3px solid #6c3483;
+  width: 80%;
+  border: 3px solid #6c3483;
 }

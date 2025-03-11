@@ -164,6 +164,13 @@ router.get("/api/user/:id", authenticate, async (req, res) => {
           path: "workouts",
           model: "workout",
         },
+        populate: {
+          path: "movements",
+          populate: {
+            path: "movement",
+            model: "movement",
+          },
+        },
       });
     if (!user) {
       return res.status(404).send({ message: "User not found" });

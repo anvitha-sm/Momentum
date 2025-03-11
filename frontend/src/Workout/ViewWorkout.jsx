@@ -4,6 +4,7 @@ import { getMovementAPI } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 export default function ViewWorkout() {
+  const token = localStorage.getItem("token");
   const location = useLocation();
   const workout = location.state?.workout;
   const [movements, setMovements] = useState([]);
@@ -14,19 +15,17 @@ export default function ViewWorkout() {
     navigate(-1);
   }
 
-  console.log(workout);
   function logWorkout() {
     navigate(`/log-workout`, { state: { workout } });
   }
 
   useEffect(() => {
-    console.log(workout);
     const fetchMovements = async () => {
       if (workout?.movements) {
         setLoading(true);
         const movementsDetails = await Promise.all(
           workout.movements.map((m) =>
-            getMovementAPI(m.movement).then((detail) => ({
+            getMovementAPI(m.movement, token).then((detail) => ({
               ...detail,
               sets: m.sets,
               metricType: m.metricType,
@@ -34,12 +33,10 @@ export default function ViewWorkout() {
             }))
           )
         );
-        console.log(movementsDetails);
         setMovements(movementsDetails);
         setLoading(false);
       }
     };
-    console.log(workout);
 
     fetchMovements();
   }, [workout]);

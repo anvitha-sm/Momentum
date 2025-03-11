@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const Movement = mongoose.model("movement");
+const authenticate = require("../middleware/authenticate");
 
 router.get("/api/movements", async (req, res) => {
   try {
@@ -12,7 +13,7 @@ router.get("/api/movements", async (req, res) => {
   }
 });
 
-router.get("/api/movements/:id", async (req, res) => {
+router.get("/api/movements/:id", authenticate, async (req, res) => {
   try {
     const { id } = req.params;
     const movement = await Movement.findById(id);

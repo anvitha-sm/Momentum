@@ -5,7 +5,7 @@ const Workout = mongoose.model("workout");
 const User = mongoose.model("user");
 const authenticate = require("../middleware/authenticate");
 
-router.post("/api/users/:userId/schedule", authenticate, async (req, res) => {
+router.post("/api/users/schedule/add", authenticate, async (req, res) => {
   try {
     const user = req.user;
     const { day, workoutId } = req.body;
@@ -24,12 +24,14 @@ router.post("/api/users/:userId/schedule", authenticate, async (req, res) => {
 
     user.schedule[day].push(workoutId);
     await user.save();
+    return res.json("working");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.delete("/api/users/:userId/schedule", authenticate, async (req, res) => {
+router.delete("/api/schedule/remove", authenticate, async (req, res) => {
+  console.log("test");
   try {
     const user = req.user;
     const { day, workoutId } = req.body;
@@ -52,19 +54,31 @@ router.delete("/api/users/:userId/schedule", authenticate, async (req, res) => {
       (id) => id.toString() !== workoutId
     );
     await user.save();
+    return res.json("working");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get("/api/users/:userId/schedule", authenticate, async (req, res) => {
+router.get("/api/users/schedule/get", authenticate, async (req, res) => {
   try {
-    const user = req.user;
-    if (!user.schedule) {
+    const userId = req.user._id;
+    const userWithSchedule = await User.findById(userId)
+      .populate("schedule.monday")
+      .populate("schedule.tuesday")
+      .populate("schedule.wednesday")
+      .populate("schedule.thursday")
+      .populate("schedule.friday")
+      .populate("schedule.saturday")
+      .populate("schedule.sunday");
+
+    if (!userWithSchedule || !userWithSchedule.schedule) {
       return res.status(404).json({ error: "Schedule not found." });
     }
-    res.status(200).json(user.schedule);
+
+    res.status(200).json(userWithSchedule.schedule);
   } catch (error) {
+    console.error("Failed to fetch schedule:", error);
     res.status(500).json({ error: error.message });
   }
 });

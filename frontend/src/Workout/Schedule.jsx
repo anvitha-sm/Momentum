@@ -1,51 +1,135 @@
 import React, { useEffect, useState } from "react";
-import { getAllWorkoutsAPI } from "../api/api"; 
-import "./Schedule.css"; 
+import { getScheduleAPI } from "../api/api";
+import { useNavigate } from "react-router-dom";
+import "./Schedule.css";
+import { removeFromScheduleAPI } from "../api/api";
+import Explore from "../Dashboard/Explore";
+import AddToSchedule from "./AddToSchedule";
 
 const Schedule = () => {
+  const token = localStorage.getItem("token");
   const [workouts, setWorkouts] = useState([]);
+  const [loading, setLoading] = useState([]);
+  const [day, setDay] = useState(null);
+  const [addingWorkout, setAddingWorkout] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    (async () => {
-      const data = await getAllWorkoutsAPI();
-      if (data) {
-        setWorkouts(data);
-      }
-    })();
-  }, []);
+    if (token) {
+      fetchData();
+    }
+  }, [token]);
 
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const res = await getScheduleAPI(token);
+      console.log(res);
+      setWorkouts(res);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+    setLoading(false);
+  };
 
-  const workoutsByDay = days.reduce((acc, day) => {
-    acc[day] = workouts.filter((w) => w.day === day);
-    return acc;
-  }, {});
+  const addWorkout = async (day) => {
+    setDay(day);
+    setAddingWorkout(true);
+  };
+
+  const removeWorkout = async (day, workout) => {
+    try {
+      await removeFromScheduleAPI({ day: day, workoutId: workout }, token); // Assuming this API call deletes the workout
+      alert("Workout removed");
+      refreshWorkouts();
+    } catch (error) {
+      console.error("Failed to remove the workout:", error);
+    }
+  };
+
+  const refreshWorkouts = async () => {
+    setAddingWorkout(false);
+    try {
+      const res = await getScheduleAPI(token);
+      setWorkouts(res);
+    } catch (error) {
+      console.error("Failed to refresh data:", error);
+    }
+  };
+
+  const days = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ];
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div className="schedule-container">
-      {days.map((day) => (
-        <div key={day} className="schedule-row">
-          <div className="day-label">{day.toUpperCase()}:</div>
-
-          <div className="workouts-list">
-            {workoutsByDay[day] && workoutsByDay[day].length > 0 ? (
-              workoutsByDay[day].map((workout) => (
-                <div className="workout-card" key={workout._id}>
-                  {workout.imageUrl && (
-                    <img
-                      src={workout.imageUrl}
-                      alt={workout.name}
-                      className="workout-image"
-                    />
-                  )}
-                  <div className="workout-name">{workout.name}</div>
-                </div>
-              ))
-            ) : (
-              <div className="no-workout">No Workouts</div>
-            )}
+    <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className="schedule-container">
+        {days.map((day) => (
+          <div key={day} className="schedule-row">
+            <div className="day-label">{day.toUpperCase()}:</div>
+            <div className="workouts-list-schedule">
+              {workouts[day] && workouts[day].length > 0 ? (
+                workouts[day].map((workout) => (
+                  <div
+                    className="workout-card-schedule"
+                    key={workout._id}
+                    onClick={() =>
+                      navigate(`/view-workout`, {
+                        state: { workout: workout },
+                      })
+                    }
+                  >
+                    {workout.imageUrl && (
+                      <img
+                        src={workout.imageUrl}
+                        alt={workout.name}
+                        className="workout-image-schedule"
+                      />
+                    )}
+                    <div className="workout-name-schedule">{workout.name}</div>
+                    <button
+                      className="schedule-remove-button"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent the navigation to the workout details
+                        removeWorkout(day, workout._id);
+                      }}
+                    >
+                      -
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div className="no-workout-schedule"></div>
+              )}
+            </div>
+            <button
+              className="schedule-add-button"
+              onClick={() => addWorkout(day)}
+            >
+              +
+            </button>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div style={{ display: "flex" }}></div>
+      <div style={{ width: "100%", backgroundColor: "#333" }}>
+        {" "}
+        {addingWorkout ? (
+          <AddToSchedule day={day} onWorkoutAdded={refreshWorkouts} />
+        ) : (
+          <p></p>
+        )}
+      </div>
     </div>
   );
 };

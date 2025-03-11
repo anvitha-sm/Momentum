@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getAllMovementsAPI, getUserGoalsAPI, saveUserGoalAPI } from "./api/api"; // Import the necessary API calls
-import mongoose from "mongoose";
+import "./userGoals.css";
+import { getAllMovementsAPI, getUserGoalsAPI, saveUserGoalAPI } from "./api/api";
 
 const UserGoals = () => {
     const token = localStorage.getItem("token");
@@ -28,8 +28,6 @@ const UserGoals = () => {
 
             movementsData.forEach((movement) => {
                 const userGoal = userGoalsData.find(goal => goal.movement === movement._id);
-                console.log(movement)
-                console.log(userGoal)
                 if (userGoal) {
                     initialGoalInputs[movement._id] = userGoal.goal;
                 } else {

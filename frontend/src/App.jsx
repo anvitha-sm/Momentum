@@ -29,7 +29,6 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/view-workout" element={<ViewWorkout />} />
-        <Route path="/logged-workouts" element={<LoggedWorkoutPage />} />
         <Route path="/user/:userId" element={<ViewOtherUserPage />} />
         <Route path="/log-workout" element={<LogWorkout />} />
         <Route path="/view-log-workout" element={<ViewLoggedWorkout />} />

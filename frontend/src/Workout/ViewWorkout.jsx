@@ -58,7 +58,7 @@ export default function ViewWorkout() {
           Back
         </button>
       </div>
-      <h2>{workout.bodyRegion}</h2>
+      <h2>Body Region: {workout.bodyRegion}</h2>
       <h3>{workout.description}</h3>
       <img style={{ width: "40%" }} src={workout.imageUrl} alt={workout.name} />
       <p>{workout.description}</p>

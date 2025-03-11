@@ -40,7 +40,6 @@ router.post("/api/workouts/create", authenticate, async (req, res) => {
       "utf8"
     );
     const urls = data.split("\n").filter(Boolean);
-    console.log(user);
     // Select a random image
     const randomIndex = Math.floor(Math.random() * urls.length);
     const imageUrl = urls[randomIndex];

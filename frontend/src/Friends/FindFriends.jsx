@@ -67,7 +67,7 @@ function FindFriends() {
       </div>
       <input
         type="text"
-        placeholder="Search for workouts by name or body region..."
+        placeholder="Search for friends by name or username..."
         className="search-input"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -79,7 +79,8 @@ function FindFriends() {
             className="workout-card"
             onClick={() => onUserClick(user._id)}
           >
-            <p>{user.username}</p>
+            <p>Name: {user.name}</p>
+            <p>Username: {user.username}</p>
           </div>
         ))}
       </div>

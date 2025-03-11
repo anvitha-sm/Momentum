@@ -87,7 +87,7 @@ export default function LogWorkout() {
           Back
         </button>
       </div>
-      <h2>{workout.bodyRegion}</h2>
+      <h2>Body Region: {workout.bodyRegion}</h2>
       <img src={workout.imageUrl} alt={workout.name} style={{ width: "40%" }} />
       <h3>{workout.description}</h3>
       <ul>

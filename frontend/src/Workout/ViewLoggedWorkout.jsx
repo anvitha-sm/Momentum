@@ -62,7 +62,7 @@ export default function ViewLoggedWorkout() {
         </button>
       </div>
       <h2>Date: {formatDate(workout.date)}</h2>
-      <h2>{workout.workouts.bodyRegion}</h2>
+      <h2>Body Region: {workout.workouts.bodyRegion}</h2>
       <h3>{workout.workouts.description}</h3>
       <img
         style={{ width: "40%" }}

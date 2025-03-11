@@ -20,6 +20,7 @@ import UserGoals from "./userGoals";
 import SpotifyCallback from "./Spotify/SpotifyCallback";
 import SpotifyPlayer from "./Spotify/SpotifyPlayer";
 import Schedule from "./Workout/Schedule";
+import WorkoutPlanner from "./Workout/WorkoutPlanner";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/callback" element={<SpotifyCallback />} />
         <Route path="/spotify-player" element={<SpotifyPlayer />} />
         <Route path="/schedule" element={<Schedule />} />
+        <Route path="/workout-planner" element={<WorkoutPlanner />} />
       </Routes>
     </>
   );

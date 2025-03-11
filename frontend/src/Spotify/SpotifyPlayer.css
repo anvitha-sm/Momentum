@@ -1,0 +1,35 @@
+.whole-page {
+    display: flex;
+}
+
+.your-spotify {
+    flex: 2;
+}
+
+.all-playlists {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.one-playlist {
+    background-color: #6c3483;
+    text-align: center;
+    color: white;
+}
+
+.playlist-image {
+    width: 100%;
+}
+
+.now-playing {
+    text-align: center;
+}
+
+.album-image {
+    width: 80%;
+}
+
+.playlist-buttons {
+    display: flex;
+    justify-content: center;
+}

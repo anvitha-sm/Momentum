@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
+import SpotifyLogin from "./Spotify/SpotifyLogin";
 
 function NavBar() {
   return (
@@ -23,6 +24,7 @@ function NavBar() {
           <NavLink to="/logged-analytics">Your Stats</NavLink>
         </li>
       </ul>
+      <SpotifyLogin />
     </nav>
   );
 }

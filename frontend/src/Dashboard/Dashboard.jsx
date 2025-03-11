@@ -56,7 +56,6 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const res = await getAllUserWorkoutsAPI(token);
-      console.log(res);
       setWorkouts(res);
     } catch (error) {
       console.error("Failed to fetch data:", error);
@@ -79,7 +78,6 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const res = await getFriendsAPI(token);
-      console.log(res);
       setFriends(res);
     } catch (error) {
       console.error("Failed to fetch data:", error);
@@ -89,9 +87,8 @@ export default function Dashboard() {
 
   const removeWorkout = async (id) => {
     try {
-      await deleteWorkoutAPI(id, token); // Assuming this API call deletes the workout
+      await deleteWorkoutAPI(id, token);
       alert("Workout removed");
-      // Filter out the removed workout from the workouts state
       const updatedWorkouts = workouts.filter((workout) => workout._id !== id);
       setWorkouts(updatedWorkouts);
     } catch (error) {
@@ -107,8 +104,6 @@ export default function Dashboard() {
 
   const currentWorkouts =
     activeTab === "myWorkouts" ? workouts : loggedWorkouts;
-  console.log(friends);
-  console.log(friends.length);
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -172,7 +167,6 @@ export default function Dashboard() {
             activeTab === "loggedWorkouts"
               ? workout.workouts
               : workout.workouts || workout;
-
           return (
             <div
               key={workout._id || workout.loggedId} // Ensure keys are unique with fallbacks
@@ -223,18 +217,9 @@ export default function Dashboard() {
       <div className="dashboard-flex navigation-buttons">
         <button
           className="view-all-logged-workouts"
-          onClick={() => handleChangePage("logged-workouts")}
+          onClick={() => handleChangePage("schedule")}
         >
-          View All Logged Workouts
-        </button>
-      </div>
-      
-      <div className="dashboard-flex navigation-buttons">
-        <button 
-          className="view-all-logged-workouts"
-          onClick={() => handleChangePage("logged-workouts")}
-        >
-          View All Logged Workouts
+          View Schedule
         </button>
       </div>
     </div>

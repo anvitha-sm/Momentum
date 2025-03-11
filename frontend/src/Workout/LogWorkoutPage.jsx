@@ -24,7 +24,7 @@ export default function LogWorkout() {
         setLoading(true);
         const movementsDetails = await Promise.all(
           workout.movements.map(async (m) => {
-            const detail = await getMovementAPI(m.movement);
+            const detail = await getMovementAPI(m.movement, token);
             return {
               ...detail,
               setsPlanned: m.sets,
@@ -32,7 +32,8 @@ export default function LogWorkout() {
               metricValue: m.metricValue,
               setsActual: "", // User input for actual sets
               repsActual: "", // User input for actual reps
-              highest: ""
+              highest: "",
+              _id: m.movement,
             };
           })
         );
@@ -66,7 +67,7 @@ export default function LogWorkout() {
             sets: m.setsActual,
             metricType: m.metricType,
             metricValue: m.repsActual,
-            highestData: m.highest
+            highestData: m.highest,
           })),
         },
         token

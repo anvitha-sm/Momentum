@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  getAllUserWorkoutsAPI,
-  getAllLoggedWorkoutsAPI,
+  saveWorkoutAPI,
   addFriendAPI,
   getUserDataAPI,
   removeFriendAPI,
@@ -36,6 +35,24 @@ export default function ViewFriend() {
       fetchData();
     }
   }, [token]);
+
+  const addSelectedWorkout = async (workout) => {
+    console.log("Adding selected workout:", workout);
+    try {
+      await saveWorkoutAPI(
+        {
+          workoutId: workout,
+        },
+        token
+      );
+      console.log("Workout added successfully:", workout);
+      alert("Workouts added successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Failed to add workout:", error);
+    }
+  };
+  console.log(workouts);
 
   const fetchData = async () => {
     setLoading(true);
@@ -156,6 +173,15 @@ export default function ViewFriend() {
                 {workoutData.name ||
                   (workoutData.workout && workoutData.workout.name)}
               </p>
+              <button
+                className="add-button"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent click from propagating to the parent div
+                  addSelectedWorkout(workout._id);
+                }}
+              >
+                +
+              </button>
             </div>
           );
         })}

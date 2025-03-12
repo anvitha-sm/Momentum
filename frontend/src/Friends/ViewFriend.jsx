@@ -66,6 +66,8 @@ export default function ViewFriend() {
     setLoading(false);
   };
 
+  console.log(user);
+
   const handleFollow = async () => {
     try {
       console.log(user._id);

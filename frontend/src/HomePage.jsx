@@ -7,7 +7,7 @@ export default function HomePage() {
   const handleLogin = () => {
     navigate("/login");
   };
-  const handelCreateAccount = () => {
+  const handleCreateAccount = () => {
     navigate("/signup");
     console.log("signup");
   };
@@ -26,10 +26,13 @@ export default function HomePage() {
             encouraging you to stick to your schedules and display your
             progress.
           </p>
-          <div className="pt-10">
-            <button className="login-button" onClick={handleLogin}>
-              Login
-            </button>
+          <div className="homepage-buttons">
+              <button onClick={handleCreateAccount}>
+                Sign Up
+              </button>
+              <button onClick={handleLogin}>
+                Login
+              </button>
           </div>
         </div>
       </div>

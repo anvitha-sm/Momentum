@@ -49,6 +49,8 @@ export default function Dashboard() {
       fetchData();
       fetchLoggedData();
       fetchFriends();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

@@ -22,7 +22,11 @@ body {
   font-weight: 200;
 }
 
-.login-button {
+.homepage-buttons {
+  gap: 5px;
+}
+
+.homepage-buttons button {
   background-color: #edb8ff;
   text-align: center;
   margin-left: auto;
@@ -36,6 +40,6 @@ body {
   transition: background-color 0.3s ease; 
 }
 
-.login-button:hover {
+.homepage-buttons button:hover {
   background-color: #d49ae6;
 }

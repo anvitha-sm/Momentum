@@ -9,12 +9,18 @@
 .all-playlists {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 2px 5px;
 }
 
 .one-playlist {
-    background-color: #6c3483;
+    background-color: #d49ae6;
     text-align: center;
     color: white;
+}
+
+.one-playlist:hover {
+    background-color: #edb8ff;
 }
 
 .playlist-image {
@@ -23,6 +29,7 @@
 
 .now-playing {
     text-align: center;
+    color: white;
 }
 
 .album-image {
@@ -32,4 +39,16 @@
 .playlist-buttons {
     display: flex;
     justify-content: center;
+    color: white;
 }
+
+.playing-buttons button {
+    color: white; 
+    background-color: #d49ae6;
+    border: 1px solid white; 
+    padding: 10px 20px; 
+  }
+  
+  .playing-buttons button:hover {
+    background-color: #edb8ff; 
+  }

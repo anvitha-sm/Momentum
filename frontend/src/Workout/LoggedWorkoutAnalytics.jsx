@@ -207,8 +207,10 @@ const LoggedWorkoutAnalytics = () => {
                 <div className="right-side-content">
                     <div className="streaks">
                         <h2>Your Logged Workout Streaks</h2>
-                        <p>Longest Streak: {streaks.longest} days</p>
-                        <p>Current Streak: {streaks.current} days</p>
+                        <ul>
+                            <li>Longest Streak: {streaks.longest} days</li>
+                            <li>Current Streak: {streaks.current} days</li>
+                        </ul>
                     </div>
                     <div className="highest-data">
                         <h2>Personal Records</h2>

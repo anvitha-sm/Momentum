@@ -198,7 +198,7 @@ function SpotifyPlayer() {
             <p>{track.artist}</p>
             <div className="playing-buttons">
               <button onClick={previousTrack}>Back</button>
-              <button onClick={playPausePlay}> {isPaused ? "Play" : "Pause"}</button>
+              <button onClick={playPausePlay}>{isPaused ? "Play" : "Pause"}</button>
               <button onClick={skipTrack}>Next</button>
             </div>
           </>

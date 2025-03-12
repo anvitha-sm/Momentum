@@ -50,7 +50,7 @@ Next, open another terminal and navigate to this repository. Run the commands be
 cd frontend
 npm install
 ```
-Run the commands beloe, which will run the frontend on http://localhost:5173 by default. If this port is not available, the frontend wil run on a different port specified in your terminal.
+Run the commands below, which will run the frontend on http://localhost:5173 by default. If this port is not available, the frontend will run on a different port specified in your terminal.
 ```
 npm run dev
 ```

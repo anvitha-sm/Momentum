@@ -35,3 +35,11 @@
 .save-goal-button:hover {
   background-color: #d49ae6;
 }
+
+.search-input {
+  margin-left:20px;
+}
+
+.goal-title {
+  margin-left:30px;
+}

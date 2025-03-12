@@ -74,13 +74,15 @@ function Explore() {
           Back
         </button>
       </div>
+      <div className="input-div">
       <input
-        type="text"
-        placeholder="Search for workouts by name or body region..."
-        className="search-input"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+          type="text"
+          placeholder="Search for workouts by name or body region..."
+          className="search-input"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       <div className="dashboard-flex workout-list">
         {filteredWorkouts.map((workout) => (
           <div

@@ -65,13 +65,16 @@ function FindFriends() {
           Back
         </button>
       </div>
-      <input
+      <div className="input-div">
+        <input
         type="text"
         placeholder="Search for friends by name or username..."
         className="search-input"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-      />
+        />
+      </div>
+
       <div className="dashboard-flex workout-list">
         {filteredUsers.map((user) => (
           <div

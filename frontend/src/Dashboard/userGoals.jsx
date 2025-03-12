@@ -81,7 +81,7 @@ const UserGoals = () => {
 
   return (
     <div className="all-movement-goals">
-      <h1>Set Your Movement Goals</h1>
+      <h1 className="goal-title">Set Your Movement Goals</h1>
       <input
         type="text"
         className="search-input"

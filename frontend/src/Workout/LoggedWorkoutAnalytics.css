@@ -9,13 +9,16 @@
 
 .right-side-content {
     width: 400px;
+    margin-right: 20px;
     margin-left: 10px;
+    border-radius:6px;
     flex-direction: column; 
 }
 
 .streaks {
     background-color: #d49ae6;
     padding: 2px 20px;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .highest-data {
@@ -26,6 +29,7 @@
 .your-goals {
     background-color: #d49ae6; 
     padding: 2px 20px;
+    border-radius: 0px 0px 10px 10px;
 }
 
 table {
@@ -52,6 +56,9 @@ tr:hover {
     transition: 0.3s;
 }
 
+.search-results {
+    margin-left:20px;
+}
 
   
 

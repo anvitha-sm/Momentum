@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllWorkoutsAPI, getAllUserWorkoutsAPI, getScheduleAPI, addToScheduleAPI } from "../api/api";
 import "../Dashboard/dashboard.css";
-import "./Schedule.css";
+import "./WorkoutPlanner.css";
+import { ErrorMessage, useErrorHandler } from "../components/ErrorHandler";
 
 export default function WorkoutPlanner() {
   const token = localStorage.getItem("token");
@@ -21,6 +22,7 @@ export default function WorkoutPlanner() {
   });
   const [schedule, setSchedule] = useState([]);
   const [currentTab, setCurrentTab] = useState("all");
+  const { error, setError, clearError, handleError } = useErrorHandler();
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
@@ -34,6 +36,8 @@ export default function WorkoutPlanner() {
 
   const fetchData = async () => {
     setLoading(true);
+    clearError();
+    
     try {
       const allRes = await getAllWorkoutsAPI();
       setAllWorkouts(allRes || []);
@@ -52,7 +56,7 @@ export default function WorkoutPlanner() {
       });
       setSelectedWorkouts(initialSelected);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      handleError(error, "Failed to load workout data");
     }
     setLoading(false);
   };
@@ -70,6 +74,7 @@ export default function WorkoutPlanner() {
 
   const handleSaveSchedule = async () => {
     setLoading(true);
+    clearError();
     
     try {
       for (const day of days) {
@@ -84,8 +89,7 @@ export default function WorkoutPlanner() {
       alert("Workout schedule saved successfully!");
       fetchData();
     } catch (error) {
-      console.error("Failed to save schedule:", error);
-      alert("Failed to save workout schedule. Please try again.");
+      handleError(error, "Failed to save workout schedule");
     }
     
     setLoading(false);
@@ -105,6 +109,13 @@ export default function WorkoutPlanner() {
         <h2>Workout Planner</h2>
         <p>Plan your weekly workout routine by selecting workouts for each day</p>
       </div>
+
+      {error && (
+        <ErrorMessage 
+          message={error} 
+          onRetry={fetchData}
+        />
+      )}
 
       <div className="tabs-container">
         <button 
@@ -165,29 +176,33 @@ export default function WorkoutPlanner() {
           <div className="workouts-selection">
             <h3>Available Workouts</h3>
             <div className="workout-cards-grid">
-              {displayWorkouts.map(workout => (
-                <div key={workout._id} className="workout-card-select">
-                  <img 
-                    src={workout.imageUrl || "https://via.placeholder.com/150"} 
-                    alt={workout.name}
-                    className="workout-image"
-                  />
-                  <div className="workout-info">
-                    <h4>{workout.name}</h4>
-                    <div className="day-select-buttons">
-                      {days.map(day => (
-                        <button
-                          key={day}
-                          className={`day-button ${selectedWorkouts[day]?._id === workout._id ? 'selected' : ''}`}
-                          onClick={() => handleWorkoutSelect(day, workout)}
-                        >
-                          {day.slice(0, 3)}
-                        </button>
-                      ))}
+              {displayWorkouts.length > 0 ? (
+                displayWorkouts.map(workout => (
+                  <div key={workout._id} className="workout-card-select">
+                    <img 
+                      src={workout.imageUrl || "https://via.placeholder.com/150"} 
+                      alt={workout.name}
+                      className="workout-image"
+                    />
+                    <div className="workout-info">
+                      <h4>{workout.name}</h4>
+                      <div className="day-select-buttons">
+                        {days.map(day => (
+                          <button
+                            key={day}
+                            className={`day-button ${selectedWorkouts[day]?._id === workout._id ? 'selected' : ''}`}
+                            onClick={() => handleWorkoutSelect(day, workout)}
+                          >
+                            {day.slice(0, 3)}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div className="no-workouts-message">No workouts available</div>
+              )}
             </div>
           </div>
         </div>

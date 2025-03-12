@@ -15,6 +15,7 @@ function FindFriends() {
   useEffect(() => {
     if (token) {
       fetchData();
+      fetchFriends();
     } else {
       navigate("/login");
     }
@@ -69,11 +70,11 @@ function FindFriends() {
       </div>
       <div className="input-div">
         <input
-        type="text"
-        placeholder="Search for friends by name or username..."
-        className="search-input"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+          type="text"
+          placeholder="Search for friends by name or username..."
+          className="search-input"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
 

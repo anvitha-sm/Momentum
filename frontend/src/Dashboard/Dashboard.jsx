@@ -111,7 +111,6 @@ export default function Dashboard() {
     <div className="dashboard">
       <div className="dashboard-flex">
         <button className="view-profile-button" onClick={() => handleChangePage("explore")}>Explore 🔍</button>
-        <button className="view-profile-button" onClick={() => handleChangePage("profile")}>My Profile</button>
       </div>
       <div className="dashboard-flex">
         <button
@@ -155,7 +154,7 @@ export default function Dashboard() {
           Logged Workouts
         </button>
         <button
-          className="view-profile-button"
+          className="view-create-workout-button"
           onClick={() => handleChangePage("createworkout")}
         >
           Create Workout

@@ -281,8 +281,8 @@
 }
 
 .view-all-logged-workouts {
-  background-color: #2196f3;
-  color: white;
+  background-color: #edb8ff;
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -291,7 +291,7 @@
 }
 
 .view-all-logged-workouts:hover {
-  background-color: #0b7dda;
+  background-color: #d49ae6;
 }
 
 /* User Display in Find Other Users */
@@ -312,7 +312,7 @@
 .view-profile-button {
   background-color: #edb8ff;
   text-align: center;
-  margin-left: auto;
+  margin: 0 auto;
   margin-top: 50px;
   border-radius: 20px; 
   padding: 15px 25px;
@@ -324,6 +324,24 @@
 }
 
 .view-profile-button:hover {
+  background-color: #d49ae6;
+}
+
+.view-create-workout-button{
+  background-color: #edb8ff;
+  text-align: center;
+  margin-left: auto;
+  margin-top: 50px;
+  border-radius: 20px; 
+  padding: 15px 25px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.view-create-workout-button:hover {
   background-color: #d49ae6;
 }
 

@@ -122,6 +122,7 @@ export default function Dashboard() {
           Following: {friends.length}
         </button>
         <Dropdown show={showDropdown} onClose={handleCloseDropdown}>
+        <ab onClick={() => navigate("/find-friend")}>Search for Friends</ab>
           {friends.length > 0 && showDropdown && (
             <ul>
               {friends.map((friend) => (
@@ -134,9 +135,8 @@ export default function Dashboard() {
               ))}
             </ul>
           )}
-          <a onClick={() => navigate("/find-friend")}>Search for Friends</a>
         </Dropdown>
-        <p className="user-info">Workouts Complete: {loggedWorkouts.length} </p>
+        <p className="user-info1">Workouts Complete: {loggedWorkouts.length} </p>
       </div>
       <div className="dashboard-flex workout-toggle">
         <button

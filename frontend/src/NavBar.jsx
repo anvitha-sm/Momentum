@@ -26,6 +26,9 @@ function NavBar() {
         <li>
           <NavLink to="/logged-analytics">Your Stats</NavLink>
         </li>
+        <li>
+          <NavLink to="/find-friend">Search Friends</NavLink>
+        </li>
       </ul>
       <SpotifyLogin />
     </nav>

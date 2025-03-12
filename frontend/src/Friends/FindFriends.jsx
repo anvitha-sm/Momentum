@@ -60,7 +60,7 @@ function FindFriends() {
   return (
     <div className="dashboard explore-page">
       <div className="dashboard-flex explore-title">
-        <h1>Find Friends 🔍</h1>
+        <h1>Find Friends</h1>
         <button onClick={goBack} className="back-button">
           Back
         </button>

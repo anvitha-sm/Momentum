@@ -32,6 +32,24 @@
 
 .user-info {
   margin-right: 30px;
+  background-color: #edb8ff;
+}
+
+.user-info:hover {
+  background-color: #d49ae6;
+}
+
+.following-button {
+  background-color: #edb8ff;
+  width: 10%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 50px;
+  border-radius: 20px; 
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
 }
 
 .workouts-list,
@@ -48,10 +66,14 @@
   position: relative;
   border-radius: 6px;
   overflow: hidden;
-  background-color: #3a3a3a;
+  background-color: #edb8ff;
   max-width: 100%;
 }
 
+
+.workout-card:hover {
+  background-color: #d49ae6;
+}
 .workout-image {
   width: 100%;
   height: 200px;
@@ -102,7 +124,7 @@
   transition: background-color 0.3s ease; 
 }
 
-.back-button:hover {
+.following-button:hover, .back-button:hover {
   background-color: #d49ae6;
 }
 
@@ -351,7 +373,7 @@
 }
 .dropdown-content {
   position: absolute;
-  background-color: gray;
+  background-color: #edb8ff;
   min-width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -370,10 +392,10 @@
 }
 
 .dropdown-content ul li:hover {
-  background-color: gray; /* Hover effect for list items */
+  background-color: #d49ae6; /* Hover effect for list items */
 }
 
-.dropdown-content a {
+.dropdown-content a, ab {
   padding-top: 10px;
   padding-left: 10px;
   color: black;
@@ -381,9 +403,13 @@
   display: block;
 }
 
+.dropdown-content ab:hover {
+  background-color: #d49ae6;
+}
+
 .close-dropdown {
   padding: 5px 10px;
-  background-color: lightgray;
+  background-color: #d49ae6;
   font-size: 15px;
   color: black;
   border: none;
@@ -391,5 +417,6 @@
   cursor: pointer;
   display: block; /* Ensures button takes its own line */
   text-align: center;
+  margin: 0 auto;
   margin-top: 10px; /* Spacing from the list */
 }

@@ -15,6 +15,8 @@ function FindFriends() {
   useEffect(() => {
     if (token) {
       fetchData();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

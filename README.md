@@ -45,15 +45,17 @@ node server.js
 Visit http://localhost:8080 in your browser and verify that the only content on the webpage is "Server is running".
 
 ### Frontend
-Next, run the commands below to 1) enter the frontend folder and 2) install all dependencies as listed in package.json.
+Next, open another terminal and navigate to this repository. Run the commands below to 1) enter the frontend folder and 2) install all dependencies as listed in package.json.
 ```
 cd frontend
 npm install
 ```
-Run the commands beloe, which will run the frontend on http://localhost:5173.
+Run the commands beloe, which will run the frontend on http://localhost:5173 by default. If this port is not available, the frontend wil run on a different port specified in your terminal.
 ```
 npm run dev
 ```
 
 ### Spotify
 Optionally, if you choose to connect your Spotify Premium account to this app, ensure that you are NOT playing Spotify on any other app. Spotify's Web Player SDK API will not function as expected if more than one device is attempting to play from the same account. The API also requires that the Spotify account must be Premium.
+
+Also, note that you MUST be running the frontend on http://localhost:5173 in order to run Spotify. The redirect URI given to the Spotify API is http://localhost:5173/callback, so if you click the "Play Spotify" button and are running the frontend on any other port, you will be redirected to http://localhost:5173.

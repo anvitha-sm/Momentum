@@ -122,7 +122,7 @@ const Schedule = () => {
         ))}
       </div>
       <div style={{ display: "flex" }}></div>
-      <div style={{ width: "100%", backgroundColor: "#333" }}>
+      <div style={{ width: "100%",  background: "linear-gradient(to top, #181a1b, #edbfff)"}}>
         {" "}
         {addingWorkout ? (
           <AddToSchedule day={day} onWorkoutAdded={refreshWorkouts} />

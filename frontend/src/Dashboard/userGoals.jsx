@@ -4,7 +4,7 @@ import {
   getAllMovementsAPI,
   getUserGoalsAPI,
   saveUserGoalAPI,
-} from "./api/api";
+} from "../api/api";
 
 const UserGoals = () => {
   const token = localStorage.getItem("token");

@@ -16,7 +16,7 @@ import NavBar from "./NavBar";
 import ViewFriend from "./Friends/ViewFriend";
 import FindFriends from "./Friends/FindFriends";
 import LoggedWorkoutAnalytics from "./Workout/LoggedWorkoutAnalytics";
-import UserGoals from "./userGoals";
+import UserGoals from "./Dashboard/userGoals";
 import SpotifyCallback from "./Spotify/SpotifyCallback";
 import SpotifyPlayer from "./Spotify/SpotifyPlayer";
 import Schedule from "./Workout/Schedule";

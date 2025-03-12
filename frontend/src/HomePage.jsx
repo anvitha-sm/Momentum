@@ -27,11 +27,7 @@ export default function HomePage() {
             progress.
           </p>
           <div className="pt-10">
-            <button className="button" onClick={handelCreateAccount}>
-              Create Account
-            </button>
-
-            <button className="button" onClick={handleLogin}>
+            <button className="login-button" onClick={handleLogin}>
               Login
             </button>
           </div>

@@ -1,6 +1,6 @@
 /* Overall Page Styling */
 .dashboard {
-  background-color: #3e3e3e;
+  background: linear-gradient(to top, #181a1b, #edbfff);
   color: #fff;
   min-height: 100vh;
   font-family: Arial, sans-serif;
@@ -29,17 +29,11 @@
   justify-content: flex-start;
 }
 
-.create-workout-button {
-  margin-left: auto;
-}
 
 .user-info {
   margin-right: 30px;
 }
 
-.explore {
-  justify-content: space-between;
-}
 .workouts-list,
 .current-workout-list {
   display: flex;
@@ -95,13 +89,21 @@
 }
 
 .back-button {
-  width: 10%;
-  font-size: 16px;
-  background-color: transparent;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  background-color: #edb8ff;
+  text-align: center;
   margin-left: auto;
+  margin-top: 50px;
+  border-radius: 20px; 
+  padding: 15px 25px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.back-button:hover {
+  background-color: #d49ae6;
 }
 
 .explore-title {
@@ -111,12 +113,24 @@
 
 .add-selected {
   justify-content: flex-end;
+  
+}
+.add-selected-button {
+  background-color: #edb8ff;
+  text-align: center;
+  margin-left: auto;
+  margin-top: 50px;
+  border-radius: 20px; 
+  padding: 15px 25px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
 }
 
-.add-selected-button {
-  justify-content: flex-end;
-  font-size: 15px;
-  background-color: gray;
+.add-selected-button:hover {
+  background-color: #d49ae6;
 }
 /* 
 .remove-button {
@@ -296,16 +310,21 @@
 }
 
 .view-profile-button {
-  background-color: #673ab7;
-  color: white;
+  background-color: #edb8ff;
+  text-align: center;
+  margin-left: auto;
+  margin-top: 50px;
+  border-radius: 20px; 
+  padding: 15px 25px;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease; 
 }
 
 .view-profile-button:hover {
-  background-color: #5e35b1;
+  background-color: #d49ae6;
 }
 
 .user-workouts-head {

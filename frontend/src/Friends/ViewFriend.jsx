@@ -12,7 +12,8 @@ import "../Dashboard/dashboard.css";
 export default function ViewFriend() {
   const location = useLocation();
   const userId = location.state?.user;
-  const isFollowing = location.state?.friends;
+  const isFollowing = location.state?.following;
+  console.log(isFollowing);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("myWorkouts");
@@ -111,7 +112,10 @@ export default function ViewFriend() {
           Back
         </button>
       </div>
-      <button className="following-button" onClick={isFollowing ? handleUnfollow : handleFollow}>
+      <button
+        className="following-button"
+        onClick={isFollowing ? handleUnfollow : handleFollow}
+      >
         {isFollowing ? "Unfollow" : "Follow"}
       </button>
       <div className="dashboard-flex">

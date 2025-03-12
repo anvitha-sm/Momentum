@@ -40,7 +40,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #444;
+  background-color: #edb8ff;
   border-radius: 6px;
   padding: 1rem;
   min-width: 120px;
@@ -66,7 +66,7 @@ body {
 
 .schedule-add-button {
   color: white;
-  background: gray;
+  background: #d49ae6;
   border-radius: 50%;
   height: 50px;
   width: 50px;

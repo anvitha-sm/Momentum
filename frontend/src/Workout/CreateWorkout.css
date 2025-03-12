@@ -1,6 +1,5 @@
 /* Overall Page Styling */
 .create-workout-page {
-  background-color: #3e3e3e; /* Dark gray background */
   color: #fff;
   min-height: 100vh;
   font-family: Arial, sans-serif;
@@ -101,7 +100,7 @@
   position: relative;
   border-radius: 6px;
   overflow: hidden;
-  background-color: #3a3a3a;
+  background-color: #d49ae6;
   max-width: 100%;
 }
 
@@ -117,7 +116,7 @@
 .movement-name {
   bottom: 10px;
   left: 10px;
-  background: rgba(0, 0, 0, 0.5);
+  background: #edb8ff;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 1rem;
@@ -127,7 +126,7 @@
 .movement-name-2 {
   bottom: 10px;
   left: 10px;
-  background: rgba(0, 0, 0, 0.5);
+  background: #edb8ff;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 1rem;
@@ -171,4 +170,22 @@
   background-color: #ccc;
   border-radius: 20px;
   font-size: 1rem;
+}
+
+.save-workout {
+  background-color: #edb8ff;
+  text-align: center;
+  margin-left: auto;
+  margin-top: 10px;
+  border-radius: 20px; 
+  padding: 15px 25px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.save-workout:hover {
+  background-color: #d49ae6;
 }

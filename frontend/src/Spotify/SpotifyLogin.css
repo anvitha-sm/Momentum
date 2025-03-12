@@ -1,11 +1,10 @@
 .spotify-login-button {
-  background-color: #edb8ff;
+  background-color: #d49ae6;
   text-align: center;
   margin-left: auto;
-  border-radius: 20px; /* Adjust for desired roundness */
-  transition: background-color 0.3s ease; /* Smooth transition */
+  font-size: 16px;
 }
 
 .spotify-login-button:hover {
-  background-color: #d49ae6; /* Darker shade on hover */
+  background-color: #edb8ff; 
 }

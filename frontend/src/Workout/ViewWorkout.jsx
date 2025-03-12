@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getMovementAPI } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import "./ViewWorkout.css";
 
 export default function ViewWorkout() {
   const token = localStorage.getItem("token");
@@ -49,7 +50,7 @@ export default function ViewWorkout() {
       <div className="dashboard-flex explore-title">
         <div style={{ display: "flex" }}>
           <h1 style={{ paddingRight: "30px" }}>{workout.name}</h1>
-          <button onClick={logWorkout}>Log this workout</button>
+          <button onClick={logWorkout} className="log-workout-view-workout-button">Log this workout</button>
         </div>
         <button onClick={goBack} className="back-button">
           Back

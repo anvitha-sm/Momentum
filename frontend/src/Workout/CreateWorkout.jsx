@@ -96,7 +96,6 @@ const CreateWorkout = () => {
       {/* Top Header */}
       <header className="header">
         <div className="header-left">Create Workout</div>
-        <div className="header-right">Account</div>
       </header>
 
       {/* Main Content */}

@@ -18,13 +18,13 @@ function NavBar() {
           <NavLink to="/explore">Explore</NavLink>
         </li>
         <li>
+          <NavLink to="/schedule">Schedule</NavLink>
+        </li>
+        <li>
           <NavLink to="/goals">Goals</NavLink>
         </li>
         <li>
           <NavLink to="/logged-analytics">Your Stats</NavLink>
-        </li>
-        <li>
-          <NavLink to="/schedule">Schedule</NavLink>
         </li>
       </ul>
       <SpotifyLogin />

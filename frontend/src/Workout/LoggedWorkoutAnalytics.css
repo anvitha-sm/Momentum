@@ -13,3 +13,45 @@
     flex-direction: column; 
 }
 
+.streaks {
+    background-color: #d49ae6;
+    padding: 2px 20px;
+}
+
+.highest-data {
+    background-color: #d49ae6; 
+    padding: 1px 20px;
+}
+
+.your-goals {
+    background-color: #d49ae6; 
+    padding: 2px 20px;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    overflow: hidden; 
+    background-color: white;
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #d49ae6;
+}
+
+th {
+    background-color: #edb8ff;
+    color: white;
+    text-transform: uppercase;
+}
+
+tr:hover {
+    background-color: #d49ae6;
+    transition: 0.3s;
+}
+
+
+  
+

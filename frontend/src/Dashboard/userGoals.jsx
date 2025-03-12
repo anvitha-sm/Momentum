@@ -84,6 +84,7 @@ const UserGoals = () => {
       <h1>Set Your Movement Goals</h1>
       <input
         type="text"
+        className="search-input"
         placeholder={"Search for a movement"}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -99,7 +100,7 @@ const UserGoals = () => {
                 value={goalInputs[movement._id] || ""}
                 onChange={(e) => handleGoalChange(movement._id, e.target.value)}
               />
-              <button onClick={() => handleSaveGoal(movement._id)}>
+              <button className="save-goal-button" onClick={() => handleSaveGoal(movement._id)}>
                 Save Goal
               </button>
             </div>

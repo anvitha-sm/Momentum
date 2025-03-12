@@ -126,6 +126,7 @@ const LoggedWorkoutAnalytics = () => {
                             type="text"
                             placeholder={searchType === "movement" ? "Search for a movement" : "Search for a workout"}
                             value={searchQuery}
+                            className="search-input"
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         <label>

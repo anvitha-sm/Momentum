@@ -23,6 +23,8 @@ Technologies
 
 Set Up
 --
+Either clone or download the .zip file for this repository.
+
 ### Backend
 First, run the commands below to 1) enter the backend folder and 2) install all dependencies as listed in package.json.
 ```

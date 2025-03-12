@@ -238,22 +238,6 @@ export const removeFromScheduleAPI = async (data, token) => {
     console.error("Error removing:", error);
     throw error;
   }
-  // console.log(token);
-  // try {
-  //   const response = await axios.delete(
-  //     url + endpoints.removeFromSchedule,
-  //     data,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  //   return response.data;
-  // } catch (error) {
-  //   console.log(error);
-  // }
 };
 
 export const getAllLoggedWorkoutsAPI = async (token) => {

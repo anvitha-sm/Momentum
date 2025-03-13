@@ -134,12 +134,13 @@ export default function Dashboard() {
           Following: {friends.length}
         </button>
         <Dropdown show={showDropdown} onClose={handleCloseDropdown}>
-          <ab onClick={() => navigate("/find-friend")}>Search for Friends</ab>
+          <ab onClick={() => navigate("/find-friend")}>Search</ab>
           {friends.length > 0 && showDropdown && (
             <ul>
               {friends.map((friend) => (
                 <li
                   key={friend._id}
+                  className="friend-name-list"
                   onClick={() => handleFriendClick(friend._id)}
                 >
                   <a style={{ cursor: "pointer" }}>{friend.username}</a>

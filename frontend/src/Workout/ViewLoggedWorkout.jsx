@@ -69,7 +69,6 @@ export default function ViewLoggedWorkout() {
               className="movement-image-2"
             />
             <p className="movement-name-2">{movement.movement.name}</p>
-            <p>Muscle Group: {movement.muscleGroup}</p>
             <p>Sets: {movement.sets}</p>
             <p>
               {movement.metricType}: {movement.metricValue}

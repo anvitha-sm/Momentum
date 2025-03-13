@@ -12,9 +12,7 @@ router.post("/api/workouts/log", authenticate, async (req, res) => {
     const user = req.user;
     const { workoutId, movements, totalDuration, notes } = req.body;
 
-    console.log(workoutId);
     const workout = await Workout.findById(workoutId);
-    console.log(workout);
     if (!workout) {
       return res.status(405).json({ error: "Workout not found" });
     }
@@ -38,42 +36,20 @@ router.post("/api/workouts/log", authenticate, async (req, res) => {
   }
 });
 
-// router.get("/api/workouts/logged", authenticate, async (req, res) => {
-//   try {
-//     const user = req.user;
-
-//     // Ensure there are logged workouts to look up
-//     if (!user.loggedWorkouts || user.loggedWorkouts.length === 0) {
-//       return res.status(200).json([]); // Returns an empty array if no workouts
-//     }
-
-//     // Fetch the full LoggedWorkout documents using the IDs stored in user.loggedWorkouts
-//     console.log(user.loggedWorkouts);
-//     const workouts = await LoggedWorkout.find({
-//       _id: { $in: user.loggedWorkouts },
-//     }).populate("workout");
-//     console.log(workouts);
-
-//     res.status(200).json(workouts);
-//   } catch (error) {
-//     console.error("Failed to retrieve logged workouts:", error);
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
 router.get("/api/workouts/logged", authenticate, async (req, res) => {
   try {
     const user = req.user;
     const savedWorkouts = await LoggedWorkout.find({
       _id: { $in: user.loggedWorkouts },
     })
-    .populate("workouts")
-    .populate({
-      path: "movements",
-      populate: {
-        path: "movement",
-        model: "movement",
-      }});
+      .populate("workouts")
+      .populate({
+        path: "movements",
+        populate: {
+          path: "movement",
+          model: "movement",
+        },
+      });
     res.status(200).json(savedWorkouts);
   } catch (error) {
     res.status(500).json({ error: error.message });

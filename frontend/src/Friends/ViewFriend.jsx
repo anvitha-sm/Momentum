@@ -13,7 +13,6 @@ export default function ViewFriend() {
   const location = useLocation();
   const userId = location.state?.user;
   const isFollowing = location.state?.following;
-  console.log(isFollowing);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("myWorkouts");
@@ -53,11 +52,9 @@ export default function ViewFriend() {
       console.error("Failed to add workout:", error);
     }
   };
-  console.log(workouts);
 
   const fetchData = async () => {
     setLoading(true);
-    console.log(userId);
     try {
       const res = await getUserDataAPI(userId, token);
       setUser(res);
@@ -67,11 +64,8 @@ export default function ViewFriend() {
     setLoading(false);
   };
 
-  console.log(user);
-
   const handleFollow = async () => {
     try {
-      console.log(user._id);
       await addFriendAPI({ friendId: user._id }, token);
       alert("Friend added");
       navigate("/dashboard");
@@ -83,7 +77,6 @@ export default function ViewFriend() {
 
   const handleUnfollow = async () => {
     try {
-      console.log(user._id);
       await removeFriendAPI({ friendId: user._id }, token);
       alert("Friend removed");
       navigate("/dashboard");
@@ -131,14 +124,6 @@ export default function ViewFriend() {
           onClick={() => handleTabChange("myWorkouts")}
         >
           Workouts
-        </button>
-        <button
-          className={`logged-workout-button ${
-            activeTab === "loggedWorkouts" ? "active" : ""
-          }`}
-          onClick={() => handleTabChange("loggedWorkouts")}
-        >
-          Logged Workouts
         </button>
       </div>
       <div className="dashboard-flex workout-list">

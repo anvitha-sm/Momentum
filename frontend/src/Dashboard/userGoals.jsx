@@ -55,7 +55,6 @@ const UserGoals = () => {
       );
     } else {
       setFilteredData(movements);
-      console.log(filteredData);
     }
   }, [searchQuery, movements]);
 
@@ -100,7 +99,10 @@ const UserGoals = () => {
                 value={goalInputs[movement._id] || ""}
                 onChange={(e) => handleGoalChange(movement._id, e.target.value)}
               />
-              <button className="save-goal-button" onClick={() => handleSaveGoal(movement._id)}>
+              <button
+                className="save-goal-button"
+                onClick={() => handleSaveGoal(movement._id)}
+              >
                 Save Goal
               </button>
             </div>

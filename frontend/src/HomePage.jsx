@@ -9,7 +9,6 @@ export default function HomePage() {
   };
   const handleCreateAccount = () => {
     navigate("/signup");
-    console.log("signup");
   };
   return (
     <div className="background">
@@ -27,12 +26,8 @@ export default function HomePage() {
             progress.
           </p>
           <div className="homepage-buttons">
-              <button onClick={handleCreateAccount}>
-                Sign Up
-              </button>
-              <button onClick={handleLogin}>
-                Login
-              </button>
+            <button onClick={handleCreateAccount}>Sign Up</button>
+            <button onClick={handleLogin}>Login</button>
           </div>
         </div>
       </div>

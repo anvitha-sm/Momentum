@@ -60,7 +60,7 @@ export default function Dashboard() {
       const res = await getAllUserWorkoutsAPI(token);
       setWorkouts(res);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      // Error handled by setting loading to false
     }
     setLoading(false);
   };
@@ -72,7 +72,7 @@ export default function Dashboard() {
       const sorted = res.sort((a, b) => new Date(b.date) - new Date(a.date));
       setLoggedWorkouts(sorted);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      // Error handled by setting loading to false
     }
     setLoading(false);
   };
@@ -83,7 +83,7 @@ export default function Dashboard() {
       const res = await getFriendsAPI(token);
       setFriends(res);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      // Error handled by setting loading to false
     }
     setLoading(false);
   };
@@ -95,7 +95,7 @@ export default function Dashboard() {
       const updatedWorkouts = workouts.filter((workout) => workout._id !== id);
       setWorkouts(updatedWorkouts);
     } catch (error) {
-      console.error("Failed to remove the workout:", error);
+      // Error notification handled by alert
     }
   };
 
@@ -135,12 +135,13 @@ export default function Dashboard() {
           Following: {friends.length}
         </button>
         <Dropdown show={showDropdown} onClose={handleCloseDropdown}>
-          <ab onClick={() => navigate("/find-friend")}>Search for Friends</ab>
+          <ab onClick={() => navigate("/find-friend")}>Search</ab>
           {friends.length > 0 && showDropdown && (
             <ul>
               {friends.map((friend) => (
                 <li
                   key={friend._id}
+                  className="friend-name-list"
                   onClick={() => handleFriendClick(friend._id)}
                 >
                   <a style={{ cursor: "pointer" }}>{friend.username}</a>

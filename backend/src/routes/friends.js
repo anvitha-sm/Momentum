@@ -22,7 +22,7 @@ router.post("/api/friends/add", authenticate, async (req, res) => {
     }
     user.friends.push(friendId);
     await user.save();
-    return res.json("working");
+    return res.status(201).json("working");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -38,7 +38,7 @@ router.delete("/api/friends/remove", authenticate, async (req, res) => {
 
     user.friends = user.friends.filter((id) => id.toString() != friendId);
     await user.save();
-    return res.json("working");
+    return res.status(201).json("working");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

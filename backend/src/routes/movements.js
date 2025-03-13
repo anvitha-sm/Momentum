@@ -22,7 +22,7 @@ router.get("/api/movements/:id", authenticate, async (req, res) => {
       return res.status(404).json({ error: "Movement not found" });
     }
 
-    res.json(movement);
+    res.status(201).json(movement);
   } catch (error) {
     if (error.kind === "ObjectId") {
       return res.status(400).json({ error: "Invalid ID format" });
@@ -40,7 +40,7 @@ router.post("/api/movements/add", async (req, res) => {
       imageUrl,
     });
     await newMovement.save();
-    res.json(newMovement);
+    res.status(201).json(newMovement);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

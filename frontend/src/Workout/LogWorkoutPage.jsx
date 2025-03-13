@@ -151,7 +151,7 @@ export default function LogWorkout() {
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
         </label>
       </div>
-      <button onClick={handleLogWorkout}>Log this workout</button>
+      <button className="log-this-workout-button" onClick={handleLogWorkout}>Log this workout</button>
     </div>
   );
 }

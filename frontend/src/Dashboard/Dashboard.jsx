@@ -69,7 +69,8 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const res = await getAllLoggedWorkoutsAPI(token);
-      setLoggedWorkouts(res);
+      const sorted = res.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setLoggedWorkouts(sorted);
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }

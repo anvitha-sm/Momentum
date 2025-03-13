@@ -47,8 +47,17 @@
     background-color: #d49ae6;
     border: 1px solid white; 
     padding: 10px 20px; 
-  }
+}
   
-  .playing-buttons button:hover {
+.playing-buttons button:hover {
     background-color: #edb8ff; 
-  }
+}
+
+.playlist-search-bar {
+    width: 97.5%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+}

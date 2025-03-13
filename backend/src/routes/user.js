@@ -81,7 +81,6 @@ router.post(
         user: addedUser._id,
       });
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   }
@@ -123,7 +122,6 @@ router.post("/api/user/login", async (req, res) => {
       .status(201)
       .json({ message: "Logged into Momentum successfully!", token });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error });
   }
 });
@@ -131,7 +129,7 @@ router.post("/api/user/login", async (req, res) => {
 router.get("/api/users", async (req, res) => {
   try {
     const users = await User.find();
-    res.json(users);
+    res.status(201).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -148,7 +146,7 @@ router.get("/api/user/friends", authenticate, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.json(user.friends);
+    res.status(201).json(user.friends);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error });
   }
@@ -168,7 +166,7 @@ router.get("/api/user/:id", authenticate, async (req, res) => {
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
-    res.json(user);
+    res.status(201).json(user);
   } catch (error) {
     res.status(500).send({ message: "Server error", error });
   }

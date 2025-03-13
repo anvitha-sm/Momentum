@@ -8,6 +8,8 @@ function SpotifyPlayer() {
   const [playlists, setPlaylists] = useState([]);
   const [track, setTrack] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPlaylists, setFilteredPlaylists] = useState([]);
   const token = localStorage.getItem('spotifyToken');
 
   useEffect(() => {
@@ -48,6 +50,14 @@ function SpotifyPlayer() {
 
     fetchPlaylists();
   }, [token]);
+
+  useEffect(() => {
+    setFilteredPlaylists(
+      playlists.filter((playlist) =>
+        playlist.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery, playlists]);
 
   const transferPlayback = async (deviceId) => {
     try {
@@ -169,8 +179,15 @@ function SpotifyPlayer() {
         <h1>Your Spotify</h1>
         {isReady ? (
           <div>
+            <input
+              type="text"
+              placeholder="Search your playlists"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="playlist-search-bar"
+            />
             <div className="all-playlists">
-              {playlists.map((playlist) => (
+              {filteredPlaylists.map((playlist) => (
                 <div
                   key={playlist.id}
                   onClick={() => playPlaylist(playlist.uri)}

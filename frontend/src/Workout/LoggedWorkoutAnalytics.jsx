@@ -187,7 +187,7 @@ const LoggedWorkoutAnalytics = () => {
                 </thead>
                 <tbody>
                   {filteredData.map((workout) =>
-                    workout.movements.map((logged) => (
+                    workout.movements.filter(logged => logged.movement.name.toLowerCase().includes(searchQuery.toLowerCase())).map((logged) => (
                       <tr key={logged.movement._id}>
                         <td>{new Date(workout.date).toLocaleDateString()}</td>
                         <td>{workout.workouts.name}</td>
@@ -198,6 +198,8 @@ const LoggedWorkoutAnalytics = () => {
                       </tr>
                     ))
                   )}
+
+                  
                 </tbody>
               </table>
             ) : (

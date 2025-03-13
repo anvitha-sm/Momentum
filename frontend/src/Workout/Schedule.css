@@ -74,10 +74,18 @@ body {
   margin-left: 10px;
 }
 
+.schedule-add-button:hover {
+  background: #edb8ff;
+}
+
 .schedule-remove-button {
   color: white;
   background: transparent;
   border-radius: 50%;
   align-self: center;
   margin-left: 10px;
+}
+
+.schedule-remove-button:hover {
+  background: #d49ae6;
 }

@@ -8,7 +8,7 @@ const authenticate = require("../middleware/authenticate");
 router.get("/api/user/goals", authenticate, async (req, res) => {
   try {
     const user = req.user;
-    res.json(user.goals);
+    res.status(201).json(user.goals);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

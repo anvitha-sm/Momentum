@@ -11,7 +11,7 @@ const path = require("path");
 router.get("/api/workouts", async (req, res) => {
   try {
     const workouts = await Workout.find();
-    res.json(workouts);
+    res.status(201).json(workouts);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -54,7 +54,7 @@ router.post("/api/workouts/create", authenticate, async (req, res) => {
     await newWorkout.save();
     user.savedWorkouts.push(newWorkout._id);
     await user.save();
-    res.json(newWorkout);
+    res.status(201).json(newWorkout);
   } catch (error) {
     if (error.code === 11000) {
       // ensure workout names are unique
@@ -80,7 +80,7 @@ router.post("/api/workouts/:workoutId/save", authenticate, async (req, res) => {
       user.savedWorkouts.push(workoutId);
       await user.save();
     }
-    res.json(workout);
+    res.status(201).json(workout);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -103,7 +103,7 @@ router.delete(
         (id) => id.toString() !== workoutId
       );
       await user.save();
-      return res.json("deleted");
+      return res.status(201).json("deleted");
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

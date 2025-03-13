@@ -15,16 +15,16 @@ router.post("/api/users/schedule/add", authenticate, async (req, res) => {
     }
 
     if (!Object.keys(user.schedule).includes(day)) {
-      return res.status(404).json({ error: "Invalid day" });
+      return res.status(400).json({ error: "Invalid day" });
     }
 
     if (user.schedule[day].length >= 2) {
-      return res.status(404).json({ error: "Only 2 workouts per day" });
+      return res.status(405).json({ error: "Only 2 workouts per day" });
     }
 
     user.schedule[day].push(workoutId);
     await user.save();
-    return res.json("working");
+    return res.status(201).json("working");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

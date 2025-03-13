@@ -41,7 +41,7 @@ export default function Dashboard() {
   }
 
   const handleCloseDropdown = () => {
-    setShowDropdown(false); 
+    setShowDropdown(false);
   };
 
   useEffect(() => {
@@ -119,8 +119,12 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard-flex">
-        <button className="view-profile-button" onClick={() => handleChangePage("explore")}>Explore 🔍</button>
-        <button className="view-profile-button" onClick={() => handleChangePage("profile")}>My Profile</button>
+        <button
+          className="view-profile-button"
+          onClick={() => handleChangePage("explore")}
+        >
+          Explore 🔍
+        </button>
       </div>
       <div className="dashboard-flex">
         <button
@@ -130,7 +134,7 @@ export default function Dashboard() {
           Following: {friends.length}
         </button>
         <Dropdown show={showDropdown} onClose={handleCloseDropdown}>
-        <ab onClick={() => navigate("/find-friend")}>Search for Friends</ab>
+          <ab onClick={() => navigate("/find-friend")}>Search for Friends</ab>
           {friends.length > 0 && showDropdown && (
             <ul>
               {friends.map((friend) => (
@@ -144,7 +148,9 @@ export default function Dashboard() {
             </ul>
           )}
         </Dropdown>
-        <p className="user-info1">Workouts Complete: {loggedWorkouts.length} </p>
+        <p className="user-info1">
+          Workouts Complete: {loggedWorkouts.length}{" "}
+        </p>
       </div>
       <div className="dashboard-flex workout-toggle">
         <button
@@ -174,8 +180,8 @@ export default function Dashboard() {
         {currentWorkouts.length === 0 ? (
           <div className="no-workouts-container">
             <p className="no-workouts-message">
-              {activeTab === "myWorkouts" 
-                ? "You don't have any workouts yet. Create one to get started!" 
+              {activeTab === "myWorkouts"
+                ? "You don't have any workouts yet. Create one to get started!"
                 : "You haven't logged any workouts yet."}
             </p>
           </div>
@@ -187,7 +193,7 @@ export default function Dashboard() {
                 : workout.workouts || workout;
             return (
               <div
-                key={workout._id || workout.loggedId} 
+                key={workout._id || workout.loggedId}
                 className="workout-card"
                 onClick={() => {
                   if (activeTab === "myWorkouts") {
@@ -215,7 +221,8 @@ export default function Dashboard() {
                   className="workout-image"
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = "https://via.placeholder.com/150?text=Workout";
+                    e.target.src =
+                      "https://via.placeholder.com/150?text=Workout";
                   }}
                 />
                 <p className="workout-name">
@@ -226,7 +233,7 @@ export default function Dashboard() {
                   <button
                     className="remove-button"
                     onClick={(e) => {
-                      e.stopPropagation(); 
+                      e.stopPropagation();
                       removeWorkout(workout._id);
                     }}
                     title="Remove workout"

@@ -6,8 +6,6 @@ import HomePage from "./HomePage";
 import CreateWorkout from "./Workout/CreateWorkout";
 import Dashboard from "./Dashboard/Dashboard";
 import Explore from "./Dashboard/Explore";
-import UserProfile from "./Account/UserProfile";
-import LoggedWorkoutPage from "./Workout/LoggedWorkoutPage";
 import ViewOtherUserPage from "./Account/ViewOtherUserPage";
 import ViewWorkout from "./Workout/ViewWorkout";
 import LogWorkout from "./Workout/LogWorkoutPage";
@@ -33,7 +31,6 @@ function App() {
         <Route path="/createworkout" element={<CreateWorkout />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/profile" element={<UserProfile />} />
         <Route path="/view-workout" element={<ViewWorkout />} />
         <Route path="/user/:userId" element={<ViewOtherUserPage />} />
         <Route path="/log-workout" element={<LogWorkout />} />

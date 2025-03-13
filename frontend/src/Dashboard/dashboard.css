@@ -1,4 +1,3 @@
-/* Overall Page Styling */
 .dashboard {
   background: linear-gradient(to top, #181a1b, #edbfff);
   color: #fff;
@@ -161,17 +160,32 @@
 .add-selected-button:hover {
   background-color: #d49ae6;
 }
-/* 
+
 .remove-button {
-  justify-content: flex-end;
-  font-size: 15px;
-  background-color: red;
-} */
-/* .add-button {
-  justify-content: flex-end;
-  font-size: 15px;
-  background-color: rgb(48, 192, 48);
-} */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: rgba(255, 59, 59, 0.8);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 1;
+}
+
+.remove-button:hover {
+  background-color: rgb(255, 0, 0);
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
 
 .userDisplay {
   box-sizing: border-box;
@@ -289,11 +303,34 @@
   font-size: 16px;
 }
 
-.loading-indicator {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 16px;
-  color: #666;
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #edb8ff;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+.loading-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .no-workouts-message {
@@ -430,4 +467,19 @@
 
 .input-div {
   margin-left:50px;
+}
+
+.view-analytics-button {
+  background-color: #edb8ff;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+.view-analytics-button:hover {
+  background-color: #d49ae6;
 }

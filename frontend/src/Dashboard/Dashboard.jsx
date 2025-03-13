@@ -41,7 +41,7 @@ export default function Dashboard() {
   }
 
   const handleCloseDropdown = () => {
-    setShowDropdown(false); // Function to close the dropdown
+    setShowDropdown(false); 
   };
 
   useEffect(() => {
@@ -107,12 +107,20 @@ export default function Dashboard() {
   const currentWorkouts =
     activeTab === "myWorkouts" ? workouts : loggedWorkouts;
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="dashboard">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p className="loading-text">Loading your dashboard...</p>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="dashboard">
       <div className="dashboard-flex">
         <button className="view-profile-button" onClick={() => handleChangePage("explore")}>Explore 🔍</button>
+        <button className="view-profile-button" onClick={() => handleChangePage("profile")}>My Profile</button>
       </div>
       <div className="dashboard-flex">
         <button
@@ -170,7 +178,7 @@ export default function Dashboard() {
               : workout.workouts || workout;
           return (
             <div
-              key={workout._id || workout.loggedId} // Ensure keys are unique with fallbacks
+              key={workout._id || workout.loggedId} 
               className="workout-card"
               onClick={() => {
                 if (activeTab === "myWorkouts") {
@@ -187,13 +195,19 @@ export default function Dashboard() {
               <img
                 src={
                   workoutData.imageUrl ||
-                  (workoutData.workout && workoutData.workout.imageUrl)
+                  (workoutData.workout && workoutData.workout.imageUrl) ||
+                  "https://via.placeholder.com/150?text=Workout"
                 }
                 alt={
                   workoutData.name ||
-                  (workoutData.workout && workoutData.workout.name)
+                  (workoutData.workout && workoutData.workout.name) ||
+                  "Workout"
                 }
                 className="workout-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://via.placeholder.com/150?text=Workout";
+                }}
               />
               <p className="workout-name">
                 {workoutData.name ||
@@ -201,13 +215,14 @@ export default function Dashboard() {
               </p>
               {activeTab === "myWorkouts" && (
                 <button
-                  className="add-button"
+                  className="remove-button"
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent the navigation to the workout details
+                    e.stopPropagation(); 
                     removeWorkout(workout._id);
                   }}
+                  title="Remove workout"
                 >
-                  -
+                  ×
                 </button>
               )}
             </div>
@@ -221,6 +236,12 @@ export default function Dashboard() {
           onClick={() => handleChangePage("schedule")}
         >
           View Schedule
+        </button>
+        <button
+          className="view-analytics-button"
+          onClick={() => handleChangePage("logged-analytics")}
+        >
+          View Analytics
         </button>
       </div>
     </div>

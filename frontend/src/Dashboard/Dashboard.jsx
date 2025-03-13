@@ -60,7 +60,7 @@ export default function Dashboard() {
       const res = await getAllUserWorkoutsAPI(token);
       setWorkouts(res);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      // Error handled by setting loading to false
     }
     setLoading(false);
   };
@@ -71,7 +71,7 @@ export default function Dashboard() {
       const res = await getAllLoggedWorkoutsAPI(token);
       setLoggedWorkouts(res);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      // Error handled by setting loading to false
     }
     setLoading(false);
   };
@@ -82,7 +82,7 @@ export default function Dashboard() {
       const res = await getFriendsAPI(token);
       setFriends(res);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      // Error handled by setting loading to false
     }
     setLoading(false);
   };
@@ -94,7 +94,7 @@ export default function Dashboard() {
       const updatedWorkouts = workouts.filter((workout) => workout._id !== id);
       setWorkouts(updatedWorkouts);
     } catch (error) {
-      console.error("Failed to remove the workout:", error);
+      // Error notification handled by alert
     }
   };
 

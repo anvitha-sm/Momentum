@@ -30,12 +30,8 @@ export default function CreateAccount() {
       password: String(password),
     };
 
-    // API call for account creation
-    console.log("Account creation data:", data);
     try {
       const res = await joinApi(data);
-      console.log(data);
-      console.log(res.status);
       if (res) {
         navigate("/login");
       }

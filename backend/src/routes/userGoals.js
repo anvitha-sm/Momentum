@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-const Movement = mongoose.model("movement");
+//const Movement = mongoose.model("movement");
 const User = mongoose.model("user");
 const authenticate = require("../middleware/authenticate");
 

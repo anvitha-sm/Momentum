@@ -31,7 +31,6 @@ router.post("/api/users/schedule/add", authenticate, async (req, res) => {
 });
 
 router.delete("/api/schedule/remove", authenticate, async (req, res) => {
-  console.log("test");
   try {
     const user = req.user;
     const { day, workoutId } = req.body;

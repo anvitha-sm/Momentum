@@ -43,7 +43,6 @@ function AddToSchedule(props) {
         token
       );
       props.onWorkoutAdded();
-      //console.log(onWorkoutAdded());
       alert("workouts added successfully!");
     } catch (error) {
       console.error("Failed to add workout:", error);

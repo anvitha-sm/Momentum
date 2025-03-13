@@ -26,7 +26,6 @@ function FindFriends() {
     try {
       const res = await getAllUsersAPI(token);
       setUsers(res);
-      console.log(users);
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
@@ -59,7 +58,6 @@ function FindFriends() {
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.username.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  console.log(filteredUsers);
   return (
     <div className="dashboard explore-page">
       <div className="dashboard-flex explore-title">

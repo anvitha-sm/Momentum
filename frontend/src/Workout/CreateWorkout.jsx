@@ -17,6 +17,8 @@ const CreateWorkout = () => {
   useEffect(() => {
     if (token) {
       fetchData();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

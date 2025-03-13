@@ -14,6 +14,8 @@ function Explore() {
   useEffect(() => {
     if (token) {
       fetchData();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

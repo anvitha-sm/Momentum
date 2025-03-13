@@ -16,6 +16,8 @@ function FindFriends() {
     if (token) {
       fetchData();
       fetchFriends();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

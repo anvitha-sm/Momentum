@@ -18,6 +18,8 @@ function AddToSchedule(props) {
   useEffect(() => {
     if (token) {
       fetchData();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

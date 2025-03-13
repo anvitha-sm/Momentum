@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./userGoals.css";
 import {
   getAllMovementsAPI,
@@ -8,6 +9,7 @@ import {
 
 const UserGoals = () => {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   const [movements, setMovements] = useState([]);
   const [userGoals, setUserGoals] = useState({});
   const [goalInputs, setGoalInputs] = useState({});
@@ -17,6 +19,8 @@ const UserGoals = () => {
   useEffect(() => {
     if (token) {
       fetchMovementsAndGoals();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

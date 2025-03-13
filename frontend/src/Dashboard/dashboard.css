@@ -1,4 +1,3 @@
-/* Overall Page Styling */
 .dashboard {
   background: linear-gradient(to top, #181a1b, #edbfff);
   color: #fff;
@@ -161,17 +160,32 @@
 .add-selected-button:hover {
   background-color: #d49ae6;
 }
-/* 
+
 .remove-button {
-  justify-content: flex-end;
-  font-size: 15px;
-  background-color: red;
-} */
-/* .add-button {
-  justify-content: flex-end;
-  font-size: 15px;
-  background-color: rgb(48, 192, 48);
-} */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: rgba(255, 59, 59, 0.8);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 1;
+}
+
+.remove-button:hover {
+  background-color: rgb(255, 0, 0);
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
 
 .userDisplay {
   box-sizing: border-box;
@@ -181,7 +195,6 @@
   overflow: hidden;
 }
 
-/* User Profile Styles */
 .user-profile-header {
   text-align: center;
   margin: 20px 0;
@@ -219,7 +232,6 @@
   color: #333;
 }
 
-/* Logged Workout Page Styles */
 .logged-workout-header {
   text-align: center;
   margin: 20px 0;
@@ -255,7 +267,6 @@
   margin-top: 5px;
 }
 
-/* Other User Profile Styles */
 .other-user-profile {
   max-width: 800px;
   margin: 0 auto;
@@ -289,21 +300,53 @@
   font-size: 16px;
 }
 
-.loading-indicator {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 16px;
-  color: #666;
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #edb8ff;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+.loading-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-workouts-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
 }
 
 .no-workouts-message {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  font-size: 18px;
   text-align: center;
-  margin: 20px 0;
-  font-size: 16px;
-  color: #666;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Navigation Buttons */
 .navigation-buttons {
   margin-top: 20px;
   justify-content: center;
@@ -323,7 +366,6 @@
   background-color: #d49ae6;
 }
 
-/* User Display in Find Other Users */
 .userDisplay {
   background-color: white;
   padding: 15px;
@@ -384,22 +426,22 @@
   min-width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  padding: 10px 0; /* Add padding to the dropdown content */
+  padding: 10px 0;
 }
 
 .dropdown-content ul {
-  list-style-type: none; /* Removes bullet points */
+  list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
 .dropdown-content ul li {
-  padding: 8px 16px; /* Add padding for each item */
-  cursor: pointer; /* Change cursor to pointer to indicate clickable items */
+  padding: 8px 16px;
+  cursor: pointer;
 }
 
 .dropdown-content ul li:hover {
-  background-color: #d49ae6; /* Hover effect for list items */
+  background-color: #d49ae6;
 }
 
 .dropdown-content a, ab {
@@ -422,12 +464,27 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: block; /* Ensures button takes its own line */
+  display: block;
   text-align: center;
   margin: 0 auto;
-  margin-top: 10px; /* Spacing from the list */
+  margin-top: 10px;
 }
 
 .input-div {
   margin-left:50px;
+}
+
+.view-analytics-button {
+  background-color: #edb8ff;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+.view-analytics-button:hover {
+  background-color: #d49ae6;
 }

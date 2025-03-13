@@ -1,6 +1,9 @@
 import axios from "axios";
 const url = "http://localhost:8080";
 
+// Set default timeout to prevent hanging requests
+axios.defaults.timeout = 10000; // 10 seconds
+
 const endpoints = {
   login: "/api/user/login",
   join: "/api/user/join",

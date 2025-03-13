@@ -5,6 +5,7 @@ import {
   getAllMovementsAPI,
 } from "../api/api.jsx";
 import "./LoggedWorkoutAnalytics.css";
+import { useNavigate } from "react-router-dom";
 
 const LoggedWorkoutAnalytics = () => {
   const token = localStorage.getItem("token");
@@ -17,12 +18,15 @@ const LoggedWorkoutAnalytics = () => {
   const [streaks, setStreaks] = useState({ longest: 0, current: 0 });
   const [goals, setGoals] = useState([]);
   const [movements, setMovements] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
       fetchData();
       fetchGoals();
       fetchMovements();
+    } else {
+      navigate("/login");
     }
   }, [token]);
 

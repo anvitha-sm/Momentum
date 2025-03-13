@@ -171,63 +171,73 @@ export default function Dashboard() {
         </button>
       </div>
       <div className="dashboard-flex workout-list">
-        {currentWorkouts.map((workout) => {
-          const workoutData =
-            activeTab === "loggedWorkouts"
-              ? workout.workouts
-              : workout.workouts || workout;
-          return (
-            <div
-              key={workout._id || workout.loggedId} 
-              className="workout-card"
-              onClick={() => {
-                if (activeTab === "myWorkouts") {
-                  navigate(`/view-workout`, {
-                    state: { workout: workoutData },
-                  });
-                } else if (activeTab === "loggedWorkouts") {
-                  navigate(`/view-log-workout`, {
-                    state: { workout: workout },
-                  });
-                }
-              }}
-            >
-              <img
-                src={
-                  workoutData.imageUrl ||
-                  (workoutData.workout && workoutData.workout.imageUrl) ||
-                  "https://via.placeholder.com/150?text=Workout"
-                }
-                alt={
-                  workoutData.name ||
-                  (workoutData.workout && workoutData.workout.name) ||
-                  "Workout"
-                }
-                className="workout-image"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "https://via.placeholder.com/150?text=Workout";
+        {currentWorkouts.length === 0 ? (
+          <div className="no-workouts-container">
+            <p className="no-workouts-message">
+              {activeTab === "myWorkouts" 
+                ? "You don't have any workouts yet. Create one to get started!" 
+                : "You haven't logged any workouts yet."}
+            </p>
+          </div>
+        ) : (
+          currentWorkouts.map((workout) => {
+            const workoutData =
+              activeTab === "loggedWorkouts"
+                ? workout.workouts
+                : workout.workouts || workout;
+            return (
+              <div
+                key={workout._id || workout.loggedId} 
+                className="workout-card"
+                onClick={() => {
+                  if (activeTab === "myWorkouts") {
+                    navigate(`/view-workout`, {
+                      state: { workout: workoutData },
+                    });
+                  } else if (activeTab === "loggedWorkouts") {
+                    navigate(`/view-log-workout`, {
+                      state: { workout: workout },
+                    });
+                  }
                 }}
-              />
-              <p className="workout-name">
-                {workoutData.name ||
-                  (workoutData.workout && workoutData.workout.name)}
-              </p>
-              {activeTab === "myWorkouts" && (
-                <button
-                  className="remove-button"
-                  onClick={(e) => {
-                    e.stopPropagation(); 
-                    removeWorkout(workout._id);
+              >
+                <img
+                  src={
+                    workoutData.imageUrl ||
+                    (workoutData.workout && workoutData.workout.imageUrl) ||
+                    "https://via.placeholder.com/150?text=Workout"
+                  }
+                  alt={
+                    workoutData.name ||
+                    (workoutData.workout && workoutData.workout.name) ||
+                    "Workout"
+                  }
+                  className="workout-image"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://via.placeholder.com/150?text=Workout";
                   }}
-                  title="Remove workout"
-                >
-                  ×
-                </button>
-              )}
-            </div>
-          );
-        })}
+                />
+                <p className="workout-name">
+                  {workoutData.name ||
+                    (workoutData.workout && workoutData.workout.name)}
+                </p>
+                {activeTab === "myWorkouts" && (
+                  <button
+                    className="remove-button"
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      removeWorkout(workout._id);
+                    }}
+                    title="Remove workout"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+            );
+          })
+        )}
       </div>
 
       <div className="dashboard-flex navigation-buttons">

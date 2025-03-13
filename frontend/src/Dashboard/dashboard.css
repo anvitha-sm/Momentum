@@ -195,7 +195,6 @@
   overflow: hidden;
 }
 
-/* User Profile Styles */
 .user-profile-header {
   text-align: center;
   margin: 20px 0;
@@ -233,7 +232,6 @@
   color: #333;
 }
 
-/* Logged Workout Page Styles */
 .logged-workout-header {
   text-align: center;
   margin: 20px 0;
@@ -269,7 +267,6 @@
   margin-top: 5px;
 }
 
-/* Other User Profile Styles */
 .other-user-profile {
   max-width: 800px;
   margin: 0 auto;
@@ -333,14 +330,23 @@
   100% { transform: rotate(360deg); }
 }
 
-.no-workouts-message {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 16px;
-  color: #666;
+.no-workouts-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
 }
 
-/* Navigation Buttons */
+.no-workouts-message {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .navigation-buttons {
   margin-top: 20px;
   justify-content: center;
@@ -360,7 +366,6 @@
   background-color: #d49ae6;
 }
 
-/* User Display in Find Other Users */
 .userDisplay {
   background-color: white;
   padding: 15px;
@@ -421,22 +426,22 @@
   min-width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  padding: 10px 0; /* Add padding to the dropdown content */
+  padding: 10px 0;
 }
 
 .dropdown-content ul {
-  list-style-type: none; /* Removes bullet points */
+  list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
 .dropdown-content ul li {
-  padding: 8px 16px; /* Add padding for each item */
-  cursor: pointer; /* Change cursor to pointer to indicate clickable items */
+  padding: 8px 16px;
+  cursor: pointer;
 }
 
 .dropdown-content ul li:hover {
-  background-color: #d49ae6; /* Hover effect for list items */
+  background-color: #d49ae6;
 }
 
 .dropdown-content a, ab {
@@ -459,10 +464,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: block; /* Ensures button takes its own line */
+  display: block;
   text-align: center;
   margin: 0 auto;
-  margin-top: 10px; /* Spacing from the list */
+  margin-top: 10px;
 }
 
 .input-div {

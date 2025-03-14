@@ -136,7 +136,7 @@ const CreateWorkout = () => {
               value={workoutDescription}
               onChange={(e) => setWorkoutDescription(e.target.value)}
               placeholder="Enter workout description"
-              rows="3" // Sets the textarea height
+              rows="3"
             />
           </div>
           <h2 className="section-title">Add Movement</h2>

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "./Account/Login";
 import CreateAccount from "./Account/CreateAccount";
 import HomePage from "./HomePage";

@@ -10,7 +10,6 @@
 
 .movement-card-goal {
   text-align: center;
-  /* background-color: #d49ae6; */
 }
 
 .goal-input input {
@@ -23,13 +22,13 @@
   text-align: center;
   margin-left: auto;
   margin-top: 10px;
-  border-radius: 20px; 
+  border-radius: 20px;
   padding: 8px 20px;
   border: none;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .save-goal-button:hover {
@@ -37,9 +36,9 @@
 }
 
 .search-input {
-  margin-left:20px;
+  margin-left: 20px;
 }
 
 .goal-title {
-  margin-left:30px;
+  margin-left: 30px;
 }

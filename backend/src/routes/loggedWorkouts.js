@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const Workout = mongoose.model("workout");
 const LoggedWorkout = mongoose.model("LoggedWorkout");
-//const LoggedWorkout = require("../collections/LoggedWorkout");
 const User = mongoose.model("user");
 const authenticate = require("../middleware/authenticate");
 

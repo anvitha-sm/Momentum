@@ -128,7 +128,6 @@ const LoggedWorkoutAnalytics = () => {
       }
     } else {
       setFilteredData(loggedWorkouts);
-      console.log(filteredData);
     }
   }, [searchQuery, searchType, loggedWorkouts]);
 
@@ -187,19 +186,23 @@ const LoggedWorkoutAnalytics = () => {
                 </thead>
                 <tbody>
                   {filteredData.map((workout) =>
-                    workout.movements.filter(logged => logged.movement.name.toLowerCase().includes(searchQuery.toLowerCase())).map((logged) => (
-                      <tr key={logged.movement._id}>
-                        <td>{new Date(workout.date).toLocaleDateString()}</td>
-                        <td>{workout.workouts.name}</td>
-                        <td>{logged.movement.name}</td>
-                        <td>{logged.sets}</td>
-                        <td>{logged.metricValue}</td>
-                        <td>{logged.highestData || "N/A"}</td>
-                      </tr>
-                    ))
+                    workout.movements
+                      .filter((logged) =>
+                        logged.movement.name
+                          .toLowerCase()
+                          .includes(searchQuery.toLowerCase())
+                      )
+                      .map((logged) => (
+                        <tr key={logged.movement._id}>
+                          <td>{new Date(workout.date).toLocaleDateString()}</td>
+                          <td>{workout.workouts.name}</td>
+                          <td>{logged.movement.name}</td>
+                          <td>{logged.sets}</td>
+                          <td>{logged.metricValue}</td>
+                          <td>{logged.highestData || "N/A"}</td>
+                        </tr>
+                      ))
                   )}
-
-                  
                 </tbody>
               </table>
             ) : (

@@ -10,7 +10,6 @@ import "../Dashboard/dashboard.css";
 function AddToSchedule(props) {
   const token = localStorage.getItem("token");
   const [searchQuery, setSearchQuery] = useState("");
-  const [addedWorkouts, setAddedWorkouts] = useState(new Set());
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

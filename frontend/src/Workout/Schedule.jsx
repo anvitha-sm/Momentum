@@ -26,7 +26,6 @@ const Schedule = () => {
     setLoading(true);
     try {
       const res = await getScheduleAPI(token);
-      console.log(res);
       setWorkouts(res);
     } catch (error) {
       console.error("Failed to fetch data:", error);
@@ -124,7 +123,12 @@ const Schedule = () => {
         ))}
       </div>
       <div style={{ display: "flex" }}></div>
-      <div style={{ width: "100%",  background: "linear-gradient(to top, #181a1b, #edbfff)"}}>
+      <div
+        style={{
+          width: "100%",
+          background: "linear-gradient(to top, #181a1b, #edbfff)",
+        }}
+      >
         {" "}
         {addingWorkout ? (
           <AddToSchedule day={day} onWorkoutAdded={refreshWorkouts} />

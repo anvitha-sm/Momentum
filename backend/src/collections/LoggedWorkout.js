@@ -24,7 +24,4 @@ const LoggedWorkoutSchema = new mongoose.Schema({
   notes: { type: String },
 });
 
-// const LoggedWorkout = mongoose.model("LoggedWorkout", LoggedWorkoutSchema);
-// module.exports = LoggedWorkout;
-
 mongoose.model("LoggedWorkout", LoggedWorkoutSchema);

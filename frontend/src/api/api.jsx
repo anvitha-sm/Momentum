@@ -35,7 +35,6 @@ export const getUserDataAPI = async (id, token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -49,7 +48,6 @@ export const getFriendsAPI = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -63,7 +61,6 @@ export const getMovementAPI = async (id, token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -213,7 +210,6 @@ export const getScheduleAPI = async (token) => {
 };
 
 export const addToScheduleAPI = async (data, token) => {
-  console.log(data);
   try {
     const response = await axios.post(url + endpoints.addToSchedule, data, {
       headers: {
@@ -271,13 +267,11 @@ export const logWorkoutAPI = async (data, token) => {
 
 export const getUserGoalsAPI = async (token) => {
   try {
-    console.log(url + endpoints.getUserGoals);
     const response = await axios.get(url + endpoints.getUserGoals, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

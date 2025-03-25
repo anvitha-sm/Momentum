@@ -1,7 +1,7 @@
 import React from 'react';
 import "./SpotifyLogin.css";
 const CLIENT_ID = '376f613bea1344dd97e9b8db385ff7dc';
-const REDIRECT_URI = 'http://localhost:5173/callback';
+const REDIRECT_URI = 'https://momentum-fitness.onrender.com/callback';
 const SCOPES = [
   'streaming',
   'user-read-email',

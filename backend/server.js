@@ -22,6 +22,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors({
   origin: 'https://momentum-fitness.onrender.com',
+  credentials: true
 }));
 
 app.use(goalsRouter);
